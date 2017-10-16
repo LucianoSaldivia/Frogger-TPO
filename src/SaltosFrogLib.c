@@ -10,7 +10,6 @@ const int SCREEN_H;				//Alto de la ventana
 const int FROG_SIZE; 			//Tamaño de frog DEBE ser menor a BOUNCE_Y
 const float MAX_BOUNCE_X;		//Máxima cantidad de saltos en X
 const float MAX_BOUNCE_Y;		//Máxima cantidad de saltos en Y
-const float FROG_RESTING_TIME;	//Tiempo entre salto y salto
 const float UPPER_OFFSET;		//Corrimiento superior, por el borde de la imagen
 const float TIEMPO_SPRITE = 0.025;
 const float CANT_SPRITES = 25;

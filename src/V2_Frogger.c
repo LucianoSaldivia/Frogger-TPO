@@ -3,6 +3,7 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
 #include "../inc/SaltosFrogLib.h"
+#include "../inc/AlInitTodo.h"
 
 const int FPS = 60;					
 const int SCREEN_W = 719;			//Ancho de la ventana
@@ -37,7 +38,6 @@ int main(int argc, char **argv)
 	float frog_x = SCREEN_W / 2.0 - FROG_SIZE / 2.0;		//Posicion inicial en x
 	float frog_y = SCREEN_H - (SCREEN_H+UPPER_OFFSET) / ((MAX_BOUNCE_Y*2.0) - 1) - FROG_SIZE / 2.0; //Posicion inicial en y
    
-   
 	bool key[4] = { false, false, false, false };
 	bool redraw = false; //Identifica si hay que redibujar o no
 	bool jump[4] = { false, false, false, false };
@@ -45,98 +45,8 @@ int main(int argc, char **argv)
    
 	int aux = 1;
 
-	if(!al_init()) {
-		fprintf(stderr, "failed to initialize allegro!\n");
-		return -1;
-	}
- 
-	if(!al_install_keyboard()) {
-		fprintf(stderr, "failed to initialize the keyboard!\n");
-		return -1;
-	}
-   
-	resting_timer = al_create_timer(FROG_RESTING_TIME);
-	if(!resting_timer) {
-		fprintf(stderr, "failed to create timer!\n");
-		return -1;
-	}
-	
-	refresh_timer = al_create_timer(FPS);
-	if(!refresh_timer) {
-		fprintf(stderr, "failed to create timer!\n");
-		al_destroy_timer(resting_timer);
-		return -1;
-	}
- 
-	if(!al_init_image_addon()) {
-		al_show_native_message_box(display, "Error", "Error", "Failed to initialize al_init_image_addon!", 
-					NULL, ALLEGRO_MESSAGEBOX_ERROR);
-		al_destroy_timer(resting_timer);
-		al_destroy_timer(refresh_timer);
-		return 0;
-	}
-   
-	display = al_create_display(SCREEN_W, SCREEN_H);
-	if(!display) {
-		fprintf(stderr, "failed to create display!\n");
-		al_destroy_timer(resting_timer);
-		return -1;
-	}
-
-    Background = al_load_bitmap("Imagenes/Background.png");
-
-	if(!Background) {
-		al_show_native_message_box(display, "Error", "Error", "Failed to load image! (BACKGROUND)",
-					NULL, ALLEGRO_MESSAGEBOX_ERROR);
-		al_destroy_display(display);
-		al_destroy_timer(resting_timer);
-		al_destroy_timer(refresh_timer);
-		return 0;
-	}
-   
-   
-	Frog = al_create_bitmap(FROG_SIZE, FROG_SIZE); //Esto después habría que cambiarlo por imagen del frog
-	if(!Frog) {
-		fprintf(stderr, "failed to create bouncer bitmap!\n");
-		al_destroy_bitmap(Background);
-		al_destroy_display(display);
-		al_destroy_timer(resting_timer);
-		al_destroy_timer(refresh_timer);
-		return -1;
-	}
-	
-	Frog = al_load_bitmap("Imagenes/Muerte.png");
-
-	if(!Background) {
-		al_show_native_message_box(display, "Error", "Error", "Failed to load image! (BACKGROUND)",
-					NULL, ALLEGRO_MESSAGEBOX_ERROR);
-		al_destroy_display(display);
-		al_destroy_timer(resting_timer);
-		al_destroy_timer(refresh_timer);
-		return 0;
-	}
-
-	al_draw_bitmap(Background, 0, 0, 0); //dibujamos la imagen en el 0,0, con 0 flags(el último siempre en 0)
-
-	al_flip_display(); //mostramos
-	al_rest(1); //esperamos un segundo
-	al_draw_bitmap(Frog, frog_x, frog_y, 0); //dibujamos el frog en su posición inicial 
-	al_flip_display(); //mostramos
-
-	event_queue = al_create_event_queue(); //creamos cola de eventos
-	if(!event_queue) {
-		fprintf(stderr, "failed to create event_queue!\n");
-		al_destroy_bitmap(Frog);
-		al_destroy_bitmap(Background);
-		al_destroy_display(display);
-		al_destroy_timer(resting_timer);
-		al_destroy_timer(refresh_timer);
-		return -1;
-	}
-	
-	al_register_event_source(event_queue, al_get_display_event_source(display)); //conectamos todas las 
-	al_register_event_source(event_queue, al_get_keyboard_event_source());//entradas a dicha cola
- 
+	if(AlInitTodo(&resting_timer, &refresh_timer, &display, &Background, &Frog, &event_queue) == -5) return -1;
+				
 	while(!doexit){ //Loop del juego
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
