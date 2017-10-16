@@ -1,2 +1,2 @@
-# gitrepo_info1_template
-Template de repositorio git para Info1
+# GitRepo_Info1_Frogger
+LS: está en home/ls/Documentos/Frogger-TPO
