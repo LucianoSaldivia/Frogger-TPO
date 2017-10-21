@@ -1,0 +1,13 @@
+Background 1 Imagenes/Background.png 0 0 0 0
+Frog 1 Imagenes/Muerte.png 0 50 50 0
+Tronco 1 Imagenes/Tronco1.png 5 60 60 296.969757
+Tronco 2 Imagenes/Tronco2.png 5 60 60 246.828369
+Tronco 3 Imagenes/Tronco3.png 5 60 60 196.686981
+Tronco 4 Imagenes/Tronco2.png 5 60 60 146.545593
+Tronco 5 Imagenes/Tronco1.png 5 60 60 96.404167
+Auto 1 Imagenes/Auto1.png 5 60 60 597.818420
+Auto 2 Imagenes/Auto2.png 5 60 60 547.676819
+Auto 3 Imagenes/Auto3.png 5 60 60 497.535309
+Auto 4 Imagenes/Auto4.png 5 60 60 447.393921
+Auto 5 Imagenes/Auto5.png 5 60 60 397.252533
+FIN

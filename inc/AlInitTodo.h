@@ -3,4 +3,5 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
 
-int AlInitTodo(ALLEGRO_TIMER **, ALLEGRO_TIMER **, ALLEGRO_DISPLAY **, ALLEGRO_BITMAP **, ALLEGRO_BITMAP **, ALLEGRO_EVENT_QUEUE **);
+int AlDrawTodo(Objeto **, float, float);
+int AlInitTodo(ALLEGRO_TIMER **, ALLEGRO_TIMER **, ALLEGRO_DISPLAY **, ALLEGRO_EVENT_QUEUE **, Objeto **);

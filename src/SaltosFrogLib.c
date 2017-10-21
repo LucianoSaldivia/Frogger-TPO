@@ -1,136 +1,174 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
+#include "../inc/VariablesFrogger.h"
 #include "../inc/SaltosFrogLib.h"
+#include "../inc/AlInitTodo.h"
 
-const int FPS;					
-const int SCREEN_W;				//Ancho de la ventana
-const int SCREEN_H;				//Alto de la ventana
-const int FROG_SIZE; 			//Tamaño de frog DEBE ser menor a BOUNCE_Y
-const float MAX_BOUNCE_X;		//Máxima cantidad de saltos en X
-const float MAX_BOUNCE_Y;		//Máxima cantidad de saltos en Y
-const float UPPER_OFFSET;		//Corrimiento superior, por el borde de la imagen
-const float TIEMPO_SPRITE = 0.025;
-const float CANT_SPRITES = 25;
-
-int FrogSaltaArriba(ALLEGRO_BITMAP **Background, ALLEGRO_BITMAP ** Frog, float *frog_x, float *frog_y ){
-	float y_inicial = *frog_y;
+int FrogSaltaArriba(Objeto **Ini){
+	Objeto *Act, *ObjetoFrog;
+	float Bounce_Y = BOUNCE_Y;
+	float y_inicial;
+		
+	Act = *(Ini);
+	while( Act != NULL ){
+		if( (strstr(Act->Nombre, "Frog") != NULL) && Act->Numero == 1 ){
+			ObjetoFrog = Act;
+		}
+		Act = Act->Sig;
+	}
+	y_inicial = ObjetoFrog->Pos_y;
 	
 	ALLEGRO_BITMAP *PosFrog[2] = {al_load_bitmap("Imagenes/RanaArriba.png"), al_load_bitmap("Imagenes/RanaSaltoArriba.png")};
 	
-	float BOUNCE_Y = SCREEN_H / (MAX_BOUNCE_Y+1);
-	if(*frog_y < 97) BOUNCE_Y = 60.0;
+	if( ObjetoFrog->Pos_y < 97) Bounce_Y = 60.0;
 
-		while(*frog_y >= y_inicial - BOUNCE_Y){
-				if(*frog_y >= y_inicial - (1*BOUNCE_Y / 7)){
-					*Frog = PosFrog[0];
+		while( ObjetoFrog->Pos_y >= y_inicial - Bounce_Y){
+				if( ObjetoFrog->Pos_y >= y_inicial - (1*Bounce_Y / 7)){
+					ObjetoFrog->Imagen = PosFrog[0];
 				}
-				else if(*frog_y >= y_inicial - (6*BOUNCE_Y / 7)){
-					*Frog = PosFrog[1];
+				else if( ObjetoFrog->Pos_y >= y_inicial - (6*Bounce_Y / 7)){
+					ObjetoFrog->Imagen = PosFrog[1];
 				}
 				else{
-					*Frog = PosFrog[0];
+					ObjetoFrog->Imagen = PosFrog[0];
 				}
-				if( ! (*Frog)) return -1;
+				if( ! ObjetoFrog->Imagen ) return -5;
 		
-			*frog_y -= BOUNCE_Y / 7 +0.01;
-			al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
+			ObjetoFrog->Pos_y -= Bounce_Y / 7 + 0.01;
+			
+			AlDrawTodo(Ini, 0, TIEMPO_SPRITE/CANT_SPRITES);
+			
+			/*al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
 			al_draw_bitmap(*Background, 0, 0, 0); //dibujamos background en la misma posicion que antes
 			al_draw_bitmap(*Frog, *frog_x, *frog_y, 0); //dibujamos frog en su nueva posicion
 			al_flip_display(); //lo mostramos
-			al_rest(TIEMPO_SPRITE/CANT_SPRITES);
-			
-			
+			al_rest(TIEMPO_SPRITE/CANT_SPRITES);*/
 		}
 	return 0;
 }
 
-int FrogSaltaIzquierda(ALLEGRO_BITMAP **Background, ALLEGRO_BITMAP ** Frog, float *frog_x, float *frog_y ){
-	float x_inicial = *frog_x;
+int FrogSaltaIzquierda(Objeto **Ini){
+	Objeto *Act, *ObjetoFrog;
+	float Bounce_X = BOUNCE_X;
+	float x_inicial;
+	
+	Act = *(Ini);
+	while( Act != NULL ){
+		if( (strstr(Act->Nombre, "Frog") != NULL) && Act->Numero == 1 ){
+			ObjetoFrog = Act;
+		}
+		Act = Act->Sig;
+	}
+	x_inicial = ObjetoFrog->Pos_x;
 	
 	ALLEGRO_BITMAP *PosFrog[2] = {al_load_bitmap("Imagenes/RanaIzquierda.png"), al_load_bitmap("Imagenes/RanaSaltoIzquierda.png")};
 	
-	float BOUNCE_X = SCREEN_H / (MAX_BOUNCE_X+1);
-
-		while(*frog_x >= x_inicial - BOUNCE_X){
-				if(*frog_x >= x_inicial - (1*BOUNCE_X / 7)){
-					*Frog = PosFrog[0];
+		while(ObjetoFrog->Pos_x >= x_inicial - Bounce_X){
+				if(ObjetoFrog->Pos_x >= x_inicial - (1*Bounce_X / 7)){
+					ObjetoFrog->Imagen = PosFrog[0];
 				}
-				else if(*frog_x >= x_inicial - (6*BOUNCE_X / 7)){
-					*Frog = PosFrog[1];
+				else if(ObjetoFrog->Pos_x >= x_inicial - (6*Bounce_X / 7)){
+					ObjetoFrog->Imagen = PosFrog[1];
 				}
 				else{
-					*Frog = PosFrog[0];
+					ObjetoFrog->Imagen = PosFrog[0];
 				}
-				if( ! (*Frog)) return -1;
+				if( ! ObjetoFrog->Imagen ) return -5;
 		
-			*frog_x -= BOUNCE_X / 7 +0.01;
-			al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
+			ObjetoFrog->Pos_x -= Bounce_X / 7 +0.01;
+			AlDrawTodo(Ini, 0, TIEMPO_SPRITE/CANT_SPRITES);
+			
+			/*al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
 			al_draw_bitmap(*Background, 0, 0, 0); //dibujamos background en la misma posicion que antes
 			al_draw_bitmap(*Frog, *frog_x, *frog_y, 0); //dibujamos frog en su nueva posicion
 			al_flip_display(); //lo mostramos
-			al_rest(TIEMPO_SPRITE/CANT_SPRITES);
+			al_rest(TIEMPO_SPRITE/CANT_SPRITES);*/
 		}
 	return 0;
 }
 
-int FrogSaltaAbajo(ALLEGRO_BITMAP **Background, ALLEGRO_BITMAP ** Frog, float *frog_x, float *frog_y ){
-	float y_inicial = *frog_y;
+int FrogSaltaAbajo(Objeto **Ini){
+	Objeto *Act, *ObjetoFrog;
+	float Bounce_Y = BOUNCE_Y;
+	float y_inicial;
+	
+	Act = *(Ini);
+	while( Act != NULL ){
+		if( (strstr(Act->Nombre, "Frog") != NULL) && Act->Numero == 1 ){
+			ObjetoFrog = Act;
+		}
+		Act = Act->Sig;
+	}
+	y_inicial = ObjetoFrog->Pos_y;
 	
 	ALLEGRO_BITMAP *PosFrog[2] = {al_load_bitmap("Imagenes/RanaAbajo.png"), al_load_bitmap("Imagenes/RanaSaltoAbajo.png")};
 	
-	float BOUNCE_Y = SCREEN_H / (MAX_BOUNCE_Y+1);
-	if(*frog_y < 50) BOUNCE_Y = 60.0;
+	if( ObjetoFrog->Pos_y < 50) Bounce_Y = 60.0;
 
-
-		while(*frog_y <= y_inicial + BOUNCE_Y){
-				if(*frog_y <= y_inicial + (1*BOUNCE_Y / 7)){
-					*Frog = PosFrog[0];
+		while(ObjetoFrog->Pos_y <= y_inicial + Bounce_Y){
+				if(ObjetoFrog->Pos_y <= y_inicial + (1*Bounce_Y / 7)){
+					ObjetoFrog->Imagen = PosFrog[0];
 				}
-				else if(*frog_y <= y_inicial + (6*BOUNCE_Y / 7)){
-					*Frog = PosFrog[1];
+				else if(ObjetoFrog->Pos_y <= y_inicial + (6*Bounce_Y / 7)){
+					ObjetoFrog->Imagen = PosFrog[1];
 				}
 				else{
-					*Frog = PosFrog[0];
+					ObjetoFrog->Imagen = PosFrog[0];
 				}
-				if( ! (*Frog)) return -1;
+				if( ! ObjetoFrog->Imagen ) return -5;
 		
-			*frog_y += BOUNCE_Y / 7 +0.01;
-			al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
+			ObjetoFrog->Pos_y += Bounce_Y / 7 +0.01;
+			AlDrawTodo(Ini, 0, TIEMPO_SPRITE/CANT_SPRITES);
+			
+			/*al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
 			al_draw_bitmap(*Background, 0, 0, 0); //dibujamos background en la misma posicion que antes
 			al_draw_bitmap(*Frog, *frog_x, *frog_y, 0); //dibujamos frog en su nueva posicion
 			al_flip_display(); //lo mostramos
-			al_rest(TIEMPO_SPRITE/CANT_SPRITES);
+			al_rest(TIEMPO_SPRITE/CANT_SPRITES);*/
 		}
 	return 0;
 }
 
-int FrogSaltaDerecha(ALLEGRO_BITMAP **Background, ALLEGRO_BITMAP ** Frog, float *frog_x, float *frog_y ){
-	float x_inicial = *frog_x;
-
+int FrogSaltaDerecha(Objeto **Ini){
+	Objeto *Act, *ObjetoFrog;
+	float Bounce_X = BOUNCE_X;
+	float x_inicial;
+	
+	Act = *(Ini);
+	while( Act != NULL ){
+		if( (strstr(Act->Nombre, "Frog") != NULL) && Act->Numero == 1 ){
+			ObjetoFrog = Act;
+		}
+		Act = Act->Sig;
+	}	
+	x_inicial = ObjetoFrog->Pos_x;
+	
 	ALLEGRO_BITMAP *PosFrog[2] = {al_load_bitmap("Imagenes/RanaDerecha.png"), al_load_bitmap("Imagenes/RanaSaltoDerecha.png")};
 	
-	float BOUNCE_X = SCREEN_H / (MAX_BOUNCE_X+1);
-
-		while(*frog_x <= x_inicial + BOUNCE_X){
-				if(*frog_x <= x_inicial + (1*BOUNCE_X / 7)){
-					*Frog = PosFrog[0];
+		while(ObjetoFrog->Pos_x <= x_inicial + Bounce_X){
+				if(ObjetoFrog->Pos_x <= x_inicial + (1*Bounce_X / 7)){
+					ObjetoFrog->Imagen = PosFrog[0];
 				}
-				else if(*frog_x <= x_inicial + (6*BOUNCE_X / 7)){
-					*Frog = PosFrog[1];
+				else if(ObjetoFrog->Pos_x <= x_inicial + (6*Bounce_X / 7)){
+					ObjetoFrog->Imagen = PosFrog[1];
 				}
 				else{
-					*Frog = PosFrog[0];
+					ObjetoFrog->Imagen = PosFrog[0];
 				}
-				if( ! (*Frog)) return -1;
+				if( ! ObjetoFrog->Imagen ) return -5;
 		
-			*frog_x += BOUNCE_X / 7 +0.01;
-			al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
+			ObjetoFrog->Pos_x += Bounce_X / 7 +0.01;
+			AlDrawTodo(Ini, 0, TIEMPO_SPRITE/CANT_SPRITES);
+			
+			/*al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
 			al_draw_bitmap(*Background, 0, 0, 0); //dibujamos background en la misma posicion que antes
 			al_draw_bitmap(*Frog, *frog_x, *frog_y, 0); //dibujamos frog en su nueva posicion
 			al_flip_display(); //lo mostramos
-			al_rest(TIEMPO_SPRITE/CANT_SPRITES);
+			al_rest(TIEMPO_SPRITE/CANT_SPRITES);*/
 		}
 	return 0;
 }
