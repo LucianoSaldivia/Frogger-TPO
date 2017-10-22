@@ -1,16 +1,26 @@
-Background 1 Imagenes/Background.png 0 0 0 0 0
-Frog 1 Imagenes/Muerte.png 0 50 50 0 0
-Tronco 1 Imagenes/Tronco1.png 1.3 60 60 300 296.969757
-Tronco 2 Imagenes/Tronco2.png 1.3 60 60 350 246.828369
-Tronco 3 Imagenes/Tronco3.png 1.3 60 60 620 196.686981
-Tronco 4 Imagenes/Tronco2.png 1.3 60 60 320 146.545593
-Tronco 5 Imagenes/Tronco1.png 1.3 60 60 320 96.404167
-Auto 1 Imagenes/Auto1.png 1.3 60 60 320 597.818420
-Auto 2 Imagenes/Auto2.png 1.3 60 60 310 547.676819
-Auto 3 Imagenes/Auto3.png 1.3 60 60 351 497.535309
-Auto 4 Imagenes/Auto4.png 1.3 60 60 215 447.393921
-Auto 5 Imagenes/Auto5.png 1.3 60 60 50 397.252533
+Back	1	Imagenes/Background.png	0	0	0	0	0	0
+Frog	1	Imagenes/RanaArriba.png	0	0	50	50	0	0
+Tronco2	1	Imagenes/Troncos2.png	Der	1.7	40	684	0.000	96.404167
+Tronco2	2	Imagenes/Troncos2.png	Der	1.7	40	684	303.000	96.404167
+Tort2 	1	Imagenes/Tortugas2.png	Izq	1	40	460	0.000	146.545593
+Tort2 	2	Imagenes/Tortugas2.png	Izq	1	40	460	229.000	146.545593
+Tronco3	1	Imagenes/Troncos3.png	Der	1.4	40	1079	0.000	196.686981
+Tronco3	2	Imagenes/Troncos3.png	Der	1.4	40	1079	474.000	196.686981
+Tronco1	1	Imagenes/Troncos1.png	Der	2.1	40	634	0.000	246.828369
+Tronco1	2	Imagenes/Troncos1.png	Der	2.1	40	634	292.000	246.828369
+Tort3 	1	Imagenes/Tortugas3.png	Izq	1.5	40	612	0.000	296.969757
+Tort3 	2	Imagenes/Tortugas3.png	Izq	1.5	40	612	1504.000	296.969757
+Auto1	1	Imagenes/Autos1.png	Izq	1	40	707	0.000	397.252533
+Auto1	2	Imagenes/Autos1.png	Izq	1	40	707	301.000	397.252533
+Auto2	1	Imagenes/Autos2.png	Der	3	40	438	0.000	447.393921
+Auto2	2	Imagenes/Autos2.png	Der	3	40	438	229.000	447.393921
+Auto3	1	Imagenes/Autos3.png	Izq	2	40	476	0.000	497.535309
+Auto3	2	Imagenes/Autos3.png	Izq	2	40	476	250.000	497.535309
+Auto4	1	Imagenes/Autos4.png	Der	4	40	436	0.000	547.676819
+Auto4	2	Imagenes/Autos4.png	Der	4	40	436	278.000	547.676819
+Auto5	1	Imagenes/Autos5.png	Izq	5	40	420	0.000	597.818420
+Auto5	2	Imagenes/Autos5.png	Izq	5	40	420	210.000	597.818420
 FIN
 
 Objeto:
-Nombre Numero RutaImgInicial Velocidad Alto Ancho X_inicial Y_inicial
+Nombre Numero RutaImgInicial DirecciónMovimiento Velocidad Alto Ancho X_inicial Y_inicial

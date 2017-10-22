@@ -23,12 +23,13 @@
 typedef struct Objeto{
 	char *Nombre;
 	int Numero;
-	ALLEGRO_BITMAP *Imagen;
 	char *DirImagen;
+	char *DirMov;
 	float Velocidad;
 	float Alto;
 	float Ancho;
 	float Pos_x;
 	float Pos_y;
+	ALLEGRO_BITMAP *Imagen;
 	struct Objeto *Sig;
 }Objeto;

@@ -25,31 +25,18 @@ void MoverCosas(Objeto **Ini){
 	
 	Act = *(Ini);
 	while(Act != NULL){
-		/*aaaaa*/
-		fprintf(stderr, "\n\t Entró al while \n");
-		/*aaaaa*/
-		if( strstr(Act->Nombre, "Background") == NULL && strstr(Act->Nombre, "Frog") == NULL){
-			if( Act->Numero % 2 != 0 ){  															// SE PONEN LOS IMPARES PARA PROBAR MOVER 1,3y5 <---  y 2y4 --->
-				/*aaaaa*/
-				fprintf(stderr, "\n\t Hizo Algo \n");
-				/*aaaaa*/
-				if(Act->Pos_x <= - Act->Ancho){
-					Act->Pos_x = SCREEN_W + 1;
-				}
-					Act->Pos_x -= Act->Velocidad;
+		if( strstr(Act->DirMov, "Izq") ){
+			if(Act->Pos_x <= - Act->Ancho){
+				Act->Pos_x = SCREEN_W;
 			}
-			else{
-				/*aaaaa*/
-				fprintf(stderr, "\n\t Hizo Algo \n");
-				/*aaaaa*/
-
-				if(Act->Pos_x >= SCREEN_W + Act->Ancho){
-					Act->Pos_x = - Act->Ancho;
-				}
-				Act->Pos_x += Act->Velocidad;
+				Act->Pos_x -= Act->Velocidad;
+		}
+		else if( strstr(Act->DirMov, "Der") ){
+			if(Act->Pos_x >= SCREEN_W + Act->Ancho){
+				Act->Pos_x = - Act->Ancho;
 			}
-			
-		}		
+			Act->Pos_x += Act->Velocidad;
+		}			
 		Act = Act->Sig;
 	}
 	AlDrawTodo(Ini, 0, 0);

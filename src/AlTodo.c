@@ -27,7 +27,7 @@ int AlDrawTodo(Objeto **Ini, float EsperaIntermedia, float EsperaFinal){
 int AlInitTodo(ALLEGRO_TIMER **resting_timer, ALLEGRO_TIMER **frames_timer, ALLEGRO_DISPLAY **display, ALLEGRO_EVENT_QUEUE **event_queue, Objeto **Ini){
 	FILE *fp;
 	Objeto *Act, *Ant;
-	char *Nombre, *Numero, *RutaImagen, *Velocidad, *Alto, *Ancho, *Pos_x, *Pos_y;
+	char *Nombre, *Numero, *RutaImagen, *DirMov, *Velocidad, *Alto, *Ancho, *Pos_x, *Pos_y;
 	
 	if(!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
@@ -82,6 +82,8 @@ int AlInitTodo(ALLEGRO_TIMER **resting_timer, ALLEGRO_TIMER **frames_timer, ALLE
 		if(Numero == NULL) return -5;
 	RutaImagen = (char *) malloc(100*sizeof(char));
 		if(RutaImagen == NULL) return -5;
+	DirMov = (char *) malloc(5*sizeof(char));
+		if(RutaImagen == NULL) return -5;
 	Velocidad = (char *) malloc(4*sizeof(char));
 		if(Velocidad == NULL) return -5;
 	Alto = (char *) malloc(4*sizeof(char));
@@ -98,7 +100,7 @@ int AlInitTodo(ALLEGRO_TIMER **resting_timer, ALLEGRO_TIMER **frames_timer, ALLE
 		fprintf(stderr, "\nNo se pudo abrir Objetos.txt");
 		return -5;		
 	}
-	fscanf(fp, "%[^ ] %[^ ] %[^ ] %[^ ] %[^ ] %[^ ] %[^ ] %[^\n]", Nombre, Numero, RutaImagen, Velocidad, Alto, Ancho, Pos_x, Pos_y);
+	fscanf(fp, "%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\n]", Nombre, Numero, RutaImagen, DirMov, Velocidad, Alto, Ancho, Pos_x, Pos_y);
 	while( ! strstr(Nombre, "FIN") ){
 		if( Act == *(Ini) ){
 			Act = (Objeto *) malloc(sizeof(Objeto));
@@ -114,13 +116,17 @@ int AlInitTodo(ALLEGRO_TIMER **resting_timer, ALLEGRO_TIMER **frames_timer, ALLE
 			if(Act->Nombre == NULL) return -5;
 		strcpy(Act->Nombre, Nombre);
 		
+		Act->DirMov = (char *) malloc(5*sizeof(char));
+			if(Act->Nombre == NULL) return -5;
+		strcpy(Act->DirMov, DirMov);
+		
 		Act->Numero = atoi(Numero);
 		
 		Act->DirImagen = (char *) malloc(100*sizeof(char));
 			if(Ancho == NULL) return -5;
 		strcpy(Act->DirImagen, RutaImagen);
 		
-		if( strstr(Nombre, "Background") ){
+		if( strstr(Nombre, "Back") ){
 			Act->Velocidad = 0;
 			Act->Alto = 0;
 			Act->Ancho = 0;
@@ -138,8 +144,19 @@ int AlInitTodo(ALLEGRO_TIMER **resting_timer, ALLEGRO_TIMER **frames_timer, ALLE
 			Act->Velocidad = atof(Velocidad);
 			Act->Alto = atof(Alto);
 			Act->Ancho = atof(Ancho);
-			Act->Pos_x = atof(Pos_x);
 			Act->Pos_y = atof(Pos_y);
+			if( strstr(DirMov, "Izq") ){
+				Act->Pos_x = SCREEN_W + atof(Pos_x);
+				if( Act->Numero == 2){
+					Act->Pos_x += Act->Ancho;
+				}
+			}
+			if( strstr(DirMov, "Der") ){
+				Act->Pos_x = - atof(Pos_x) - Act->Ancho;
+				if( Act->Numero == 2){
+					Act->Pos_x -= Act->Ancho;
+				}
+			}
 		}
 
 		Act->Imagen = al_load_bitmap(RutaImagen);
@@ -152,7 +169,7 @@ int AlInitTodo(ALLEGRO_TIMER **resting_timer, ALLEGRO_TIMER **frames_timer, ALLE
 		}
 		Ant = Act;
 		Act = NULL;
-		fscanf(fp, "%[^ ] %[^ ] %[^ ] %[^ ] %[^ ] %[^ ] %[^ ] %[^\n]", Nombre, Numero, RutaImagen, Velocidad, Alto, Ancho, Pos_x, Pos_y);
+		fscanf(fp, "%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\t]\t%[^\n]", Nombre, Numero, RutaImagen, DirMov, Velocidad, Alto, Ancho, Pos_x, Pos_y);
 	}
 	Ant->Sig = NULL;
 	
