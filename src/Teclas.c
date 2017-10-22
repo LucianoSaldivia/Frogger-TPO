@@ -15,7 +15,7 @@ enum MYJUMPS {
 	JUMP_UP, JUMP_DOWN, JUMP_LEFT, JUMP_RIGHT
 };
 
-int HayQueRedibujar(bool *redraw, bool *jump, Objeto **Ini){
+int HayQueRedibujar(bool *redraw, bool *jump, ALLEGRO_TIMER **resting_timer, ALLEGRO_TIMER **frames_timer, ALLEGRO_DISPLAY **display, ALLEGRO_EVENT_QUEUE **event_queue, Objeto **Ini){
 	int aux;
 	
 	*(redraw) = false; //dejamos redraw en false, para que no entre infinitas veces					  
@@ -38,7 +38,10 @@ int HayQueRedibujar(bool *redraw, bool *jump, Objeto **Ini){
 		jump[JUMP_RIGHT] = false;
 	}	
 	
-	if(aux == -5) return -5;
+	if(aux == -5) {
+		AlDestroyTodo(resting_timer, frames_timer, display, event_queue, Ini);
+		return -5;
+	}
 	else return 0;
 }
 

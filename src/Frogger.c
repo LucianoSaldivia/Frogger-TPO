@@ -21,13 +21,8 @@ int main(int argc, char **argv)
 {
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
-	ALLEGRO_TIMER *resting_timer = NULL, *frames_timer;
-	
+	ALLEGRO_TIMER *resting_timer = NULL, *frames_timer;	
 	Objeto *Ini = NULL;
-	/*aaaaa*/
-	/*int aux;
-	Objeto *Act;*/
-	/*aaaaa*/
 	bool key[4] = { false, false, false, false };
 	bool redraw = false; //Identifica si hay que redibujar o no
 	bool jump[4] = { false, false, false, false };
@@ -38,11 +33,7 @@ int main(int argc, char **argv)
 	while(!doexit){ //Loop del juego
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
-
-		//if( al_get_timer_started(frames_timer) == true ) fprintf(stderr, "\n\t frame_timer INICIALIZADO \n");
-		/*aaaaa*/
-		/*MoverAlgo(&Ini);*/
-		/*aaaaa*/
+		
 		if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { //si recibe esto, cierra la ventana
 			break;
 		}
@@ -59,9 +50,8 @@ int main(int argc, char **argv)
 			Jugador1SoltoFlecha(&ev, key, &doexit, &resting_timer);
 		}
 		if(redraw) { //si al llegar acá, hay que redibujar
-			if ( HayQueRedibujar(&redraw, jump, &Ini) == -5){
-				AlDestroyTodo(&resting_timer, &frames_timer, &display, &event_queue, &Ini);
-				return -1;
+			if ( HayQueRedibujar(&redraw, jump, &resting_timer, &frames_timer, &display, &event_queue, &Ini) == -5){
+				break;
 			}	
 		}
 	} //FIN DEL LOOP
