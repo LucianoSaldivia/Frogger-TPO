@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	bool jump[4] = { false, false, false, false };
 	bool doexit = false; //Identifica si hay que salir o no
 	
-	if( AlInitTodo(&resting_timer, &frames_timer, &display, &event_queue, &Ini) == -5 ) return -1;
+	if( AlInitTodo(&resting_timer, &frames_timer, &display, &event_queue, &Ini) == -5 ) return -1;	
 	
 	while(!doexit){ //Loop del juego
 		ALLEGRO_EVENT ev;

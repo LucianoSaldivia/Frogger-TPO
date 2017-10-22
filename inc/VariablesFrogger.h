@@ -29,6 +29,7 @@ typedef struct Objeto{
 	float Alto;
 	float Ancho;
 	float Pos_x;
+	float Dif_x;
 	float Pos_y;
 	ALLEGRO_BITMAP *Imagen;
 	struct Objeto *Sig;
