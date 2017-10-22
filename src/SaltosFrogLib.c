@@ -6,7 +6,7 @@
 #include <allegro5/allegro_native_dialog.h>
 #include "../inc/VariablesFrogger.h"
 #include "../inc/SaltosFrogLib.h"
-#include "../inc/AlInitTodo.h"
+#include "../inc/AlTodo.h"
 
 int FrogSaltaArriba(Objeto **Ini){
 	Objeto *Act, *ObjetoFrog;
@@ -41,12 +41,6 @@ int FrogSaltaArriba(Objeto **Ini){
 			ObjetoFrog->Pos_y -= Bounce_Y / 7 + 0.01;
 			
 			AlDrawTodo(Ini, 0, TIEMPO_SPRITE/CANT_SPRITES);
-			
-			/*al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
-			al_draw_bitmap(*Background, 0, 0, 0); //dibujamos background en la misma posicion que antes
-			al_draw_bitmap(*Frog, *frog_x, *frog_y, 0); //dibujamos frog en su nueva posicion
-			al_flip_display(); //lo mostramos
-			al_rest(TIEMPO_SPRITE/CANT_SPRITES);*/
 		}
 	return 0;
 }
@@ -81,12 +75,6 @@ int FrogSaltaIzquierda(Objeto **Ini){
 		
 			ObjetoFrog->Pos_x -= Bounce_X / 7 +0.01;
 			AlDrawTodo(Ini, 0, TIEMPO_SPRITE/CANT_SPRITES);
-			
-			/*al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
-			al_draw_bitmap(*Background, 0, 0, 0); //dibujamos background en la misma posicion que antes
-			al_draw_bitmap(*Frog, *frog_x, *frog_y, 0); //dibujamos frog en su nueva posicion
-			al_flip_display(); //lo mostramos
-			al_rest(TIEMPO_SPRITE/CANT_SPRITES);*/
 		}
 	return 0;
 }
@@ -123,12 +111,6 @@ int FrogSaltaAbajo(Objeto **Ini){
 		
 			ObjetoFrog->Pos_y += Bounce_Y / 7 +0.01;
 			AlDrawTodo(Ini, 0, TIEMPO_SPRITE/CANT_SPRITES);
-			
-			/*al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
-			al_draw_bitmap(*Background, 0, 0, 0); //dibujamos background en la misma posicion que antes
-			al_draw_bitmap(*Frog, *frog_x, *frog_y, 0); //dibujamos frog en su nueva posicion
-			al_flip_display(); //lo mostramos
-			al_rest(TIEMPO_SPRITE/CANT_SPRITES);*/
 		}
 	return 0;
 }
@@ -163,12 +145,6 @@ int FrogSaltaDerecha(Objeto **Ini){
 		
 			ObjetoFrog->Pos_x += Bounce_X / 7 +0.01;
 			AlDrawTodo(Ini, 0, TIEMPO_SPRITE/CANT_SPRITES);
-			
-			/*al_clear_to_color(al_map_rgb(0, 0, 0)); //borramos display, dejamos todo en 0
-			al_draw_bitmap(*Background, 0, 0, 0); //dibujamos background en la misma posicion que antes
-			al_draw_bitmap(*Frog, *frog_x, *frog_y, 0); //dibujamos frog en su nueva posicion
-			al_flip_display(); //lo mostramos
-			al_rest(TIEMPO_SPRITE/CANT_SPRITES);*/
 		}
 	return 0;
 }

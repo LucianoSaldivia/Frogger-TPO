@@ -5,6 +5,7 @@
 #include "../inc/VariablesFrogger.h"
 #include "../inc/SaltosFrogLib.h"
 #include "../inc/Teclas.h"
+#include "../inc/AlTodo.h"
 
 
 enum MYKEYS {
@@ -52,26 +53,10 @@ void Jugador1ApretoFlecha(ALLEGRO_EVENT *ev, bool *key, bool *jump, bool *redraw
 		}
 		Act = Act->Sig;
 	}
-	
-	/* Act = *(Ini);
-	/*aaaaa
-	fprintf(stderr, "\n\t Hasta acá llega, creeme por favor \n");
-	/*aaaaa
-	while( ( (strstr(Act->Nombre, "Frog") == NULL) || Act->Numero != 1 ) && Act != NULL ){
-		Act = Act->Sig;
-	}*/
-	
-	/*aaaaa*/
-	fprintf(stderr, "\n Nodo ELEGIDO COMO FROG:");
-	fprintf(stderr, "\n %s %d %s %f %f %f %f %f\n", ObjetoFrog->Nombre, ObjetoFrog->Numero, ObjetoFrog->DirImagen, ObjetoFrog->Velocidad, ObjetoFrog->Alto, ObjetoFrog->Ancho, ObjetoFrog->Pos_x, ObjetoFrog->Pos_y);
-	/*aaaaa*/
 		
 	switch(ev->keyboard.keycode) {
 		case ALLEGRO_KEY_UP: //si es tecla arriba
 			key[KEY_UP] = true; //en nuestro set de teclas, arriba es true
-			/*aaaaa*/
-			fprintf(stderr, "\n\t Apretaste ARRIBA, yo te vi \n");
-			/*aaaaa*/
 			if( ObjetoFrog->Pos_y >= (BOUNCE_Y+UPPER_OFFSET)) { //si se puede mover, habilitamos el movimiento
 				jump[JUMP_UP] = true;
 			}	
@@ -79,9 +64,6 @@ void Jugador1ApretoFlecha(ALLEGRO_EVENT *ev, bool *key, bool *jump, bool *redraw
 	
 		case ALLEGRO_KEY_DOWN://si es tecla abajo
 			key[KEY_DOWN] = true;  //en nuestro set de teclas, abajo es true
-			/*aaaaa*/
-			fprintf(stderr, "\n\t Apretaste ABAJO, yo te vi \n");
-			/*aaaaa*/
 			if(key[KEY_DOWN] && ObjetoFrog->Pos_y <= SCREEN_H - FROG_SIZE - BOUNCE_Y) {//si se puede mover, le cambiamos la posicion
 				jump[JUMP_DOWN] = true;
 			}
@@ -89,9 +71,6 @@ void Jugador1ApretoFlecha(ALLEGRO_EVENT *ev, bool *key, bool *jump, bool *redraw
 	
 		case ALLEGRO_KEY_LEFT: //igual que KEY_UP, pero para la izquierda
 			key[KEY_LEFT] = true;
-			/*aaaaa*/
-			fprintf(stderr, "\n\t Apretaste IZQUIERDA, yo te vi \n");
-			/*aaaaa*/
 			if(key[KEY_LEFT] && ObjetoFrog->Pos_x >= BOUNCE_X) {
 				jump[JUMP_LEFT] = true;
 			}
@@ -99,17 +78,11 @@ void Jugador1ApretoFlecha(ALLEGRO_EVENT *ev, bool *key, bool *jump, bool *redraw
 	
 		case ALLEGRO_KEY_RIGHT: //igual que  KEY_DOWN, pero para la derecha
 			key[KEY_RIGHT] = true;
-			/*aaaaa*/
-			fprintf(stderr, "\n\t Apretaste DERECHA, yo te vi \n");
-			/*aaaaa*/
 			if(key[KEY_RIGHT] && ObjetoFrog->Pos_x <= SCREEN_W - FROG_SIZE - BOUNCE_X) {
 				jump[JUMP_RIGHT] = true;
 			}  
 			break;
-	}	
-	/*aaaaa*/
-	fprintf(stderr, "\n\t Antes del redraw y el timer será? \n");
-	/*aaaaa*/
+	}
 	*(redraw) = true;
 	al_start_timer(*(resting_timer));
 }
@@ -148,22 +121,22 @@ void Jugador1SigueApretandoFlecha(ALLEGRO_EVENT *ev, bool *key, bool *jump, bool
 	}
 	
 	if(key[KEY_UP] && Act->Pos_y >= BOUNCE_Y) { //si UP estaba presionada y se puede mover
-				jump[JUMP_UP] = true;
-			}
-			
-			if(key[KEY_DOWN] && Act->Pos_y <= SCREEN_H - FROG_SIZE - BOUNCE_Y) {
-				jump[JUMP_DOWN] = true;
-			}
-			
-			if(key[KEY_LEFT] && Act->Pos_x >= BOUNCE_X) {
-				jump[JUMP_LEFT] = true;
-			}
-	 
-			if(key[KEY_RIGHT] && Act->Pos_x <= SCREEN_W - FROG_SIZE - BOUNCE_X) {
-				jump[JUMP_RIGHT] = true;
-			}
+		jump[JUMP_UP] = true;
+	}
+	
+	if(key[KEY_DOWN] && Act->Pos_y <= SCREEN_H - FROG_SIZE - BOUNCE_Y) {
+		jump[JUMP_DOWN] = true;
+	}
+	
+	if(key[KEY_LEFT] && Act->Pos_x >= BOUNCE_X) {
+		jump[JUMP_LEFT] = true;
+	}
+	
+	if(key[KEY_RIGHT] && Act->Pos_x <= SCREEN_W - FROG_SIZE - BOUNCE_X) {
+		jump[JUMP_RIGHT] = true;
+	}
 		
-			*(redraw) = true; //HAY que redibujar	
+	*(redraw) = true; //HAY que redibujar	
 }
 
 
