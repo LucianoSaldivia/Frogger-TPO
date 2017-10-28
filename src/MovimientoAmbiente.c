@@ -8,7 +8,7 @@
 #include "../inc/AlTodo.h"
 #include "../inc/MovimientoAmbiente.h"
 
-void MoverCosas(Objeto **Ini){			//Agregar un Objeto *Ant, para poder poner bien la posicion nueva una vez que un objeto pasa el rango visible
+void MoverAmbiente(Objeto **Ini){			//Agregar un Objeto *Ant, para poder poner bien la posicion nueva una vez que un objeto pasa el rango visible
 	Objeto *Act, *Ant;
 	
 	Act = *(Ini);

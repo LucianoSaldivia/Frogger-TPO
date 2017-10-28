@@ -10,61 +10,62 @@
 #include "../inc/SaltosFrogLib.h"
 #include "../inc/MovimientoAmbiente.h"
  
-int main(int argc, char **argv)
+int main(void)
 {
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
-	ALLEGRO_TIMER *resting_timer = NULL, *frames_timer;	
-	ALLEGRO_BITMAP **PosFrog;
-	Objeto *Ini = NULL;
-	bool key[4] = { false, false, false, false };
-	bool redraw = false; //Identifica si hay que redibujar o no
-	bool jump[4] = { false, false, false, false };
-	bool doexit = false; //Identifica si hay que salir o no
+	ALLEGRO_TIMER *resting_timer = NULL, *frames_timer = NULL;	
+	ALLEGRO_BITMAP **VecFrog = NULL;
+	Objeto *Act = NULL, *ObjetoFrog = NULL, *Ini = NULL;
+	char FlagDeSalida = 0; // Flag de salida
+	bool *key = NULL;
 	
-	PosFrog = malloc(sizeof( 8 * sizeof(ALLEGRO_BITMAP *) ));
-	
-	if( AlInitTodo(&resting_timer, &frames_timer, &display, &event_queue, PosFrog) == -5 ){
-		AlDestroyTodo(&resting_timer, &frames_timer, &display, &event_queue, PosFrog);
+	if( AlInitTodo(&resting_timer, &frames_timer, &display, &event_queue, &VecFrog, &key) == -5 ){
+		AlDestroyTodo(&resting_timer, &frames_timer, &display, &event_queue, &VecFrog, &key);
 		return -1;	
 	}
 	
-	if( IniciarLista(&Ini) == -5 ){
-		AlDestroyTodo(&resting_timer, &frames_timer, &display, &event_queue, PosFrog);
+	if( IniciarLista(&Ini, &ObjetoFrog) == -5 ){
+		AlDestroyTodo(&resting_timer, &frames_timer, &display, &event_queue, &VecFrog, &key);
 		LiberarTodo(&Ini);	
 		return -1;
 	}
-	
+	/*aaa*/
+	fprintf(stderr, "\n \n ");
+	Act = Ini;
+	while(Act != NULL){
+		fprintf(stderr, "\n %s %d %s %s %f %f %f ", Act->Nombre, Act->Numero, Act->DirImagen, Act->DirMov, Act->Velocidad, Act->Dif_x, Act->Pos_y);
+		Act = Act->Sig;
+	}
+	fprintf(stderr, "\n %f", BOUNCE_Y);	
+	/*aaa*/
+
 	al_start_timer(frames_timer);
-	
-	while(!doexit){ //Loop del juego
+	al_start_timer(resting_timer);
+	al_flush_event_queue(event_queue);
+	while( /*FlagDeSalida == 0*/ 1 ){ //Loop del juego
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
 		
-		if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) { //si recibe esto, cierra la ventana
-			doexit = true;
-		}
-		else if(ev.timer.source == frames_timer) {
-			MoverCosas(&Ini);			
-		}
-		else if(ev.type == ALLEGRO_EVENT_KEY_DOWN) { //evento de tecla presionada
-			Jugador1ApretoFlecha(&ev, key, jump, &redraw, &resting_timer, &Ini);
-		}
-		else if(ev.timer.source == resting_timer) { //evento de timer de descanso
-			Jugador1SigueApretandoFlecha(&ev, key, jump, &redraw, &Ini);
-		}
-		else if(ev.type == ALLEGRO_EVENT_KEY_UP) { //evento de tecla soltada
-			Jugador1SoltoFlecha(&ev, key, &doexit, &resting_timer);
-		}
-		if(redraw) { //si al llegar acá, hay que redibujar
-			if ( SaltoJugador1(&redraw, jump, &Ini, PosFrog) == -5){
+		if( ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE || ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE ) /*FlagDeSalida = 5*/ break;
+		else switch(ev.type){
+			case ALLEGRO_EVENT_TIMER:
+				if(ev.timer.source == frames_timer) MoverAmbiente(&Ini);
+				else if(ev.timer.source == resting_timer) TeclaPresionadaJugador1( &ev, &key, &Ini, &ObjetoFrog, VecFrog );
 				break;
-			}	
+			case ALLEGRO_EVENT_KEY_DOWN:
+				fprintf(stderr, "\n \n \t\t Apretaste algo... \n");
+				TeclaPresionadaJugador1( &ev, &key, &Ini, &ObjetoFrog, VecFrog );
+				//Jugador1ApretoFlecha(&ev, &key, &resting_timer, &ObjetoFrog, &Ini, VecFrog);
+				break;
+			case ALLEGRO_EVENT_KEY_UP:
+				TeclaSoltadaJugador1( &ev, &key );
+				//Jugador1SoltoFlecha(&ev, &key, &doexit, &resting_timer);
+				break;
 		}
-	} //FIN DEL LOOP
-	
-	AlDestroyTodo(&resting_timer, &frames_timer, &display, &event_queue, PosFrog);
+	} //Fin del Loop 	
+	AlDestroyTodo(&resting_timer, &frames_timer, &display, &event_queue, &VecFrog, &key);
 	LiberarTodo(&Ini);
-	
+		
 	return 0;
 }

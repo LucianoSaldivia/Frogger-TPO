@@ -3,4 +3,4 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
 
-void MoverCosas(Objeto **);
+void MoverAmbiente(Objeto **);

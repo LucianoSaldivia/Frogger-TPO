@@ -37,3 +37,28 @@ Nivel Facil	--> Velocidades cercana a 1, Espacios Autos > 3/4 ancho, Espacios Tr
 Nivel Intermedio --> Vel cercana a 2, Esp A = 1/2 Ancho, Esp TyT c (2/3 y 3/4) Ancho
 Nivel Dificil --> Vel cercana a 3, Esp A = 5/12 Ancho, Esp TyT c (3/4 ; 3/2) Ancho
 Nivel "Imposible" --> Vel > 4, Esp A < 1/3 Ancho, Esp TyT > 2 Ancho
+
+
+	while( /*FlagDeSalida == 0*/ 1 ){ //Loop del juego
+		ALLEGRO_EVENT ev;
+		al_wait_for_event(event_queue, &ev);
+		
+		if( ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE || ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE ) /*FlagDeSalida = 5*/ break;
+		else switch(ev.type){
+			case ALLEGRO_EVENT_TIMER:
+				if(ev.timer.source == frames_timer) MoverAmbiente(&Ini);
+				else if(ev.timer.source == resting_timer) TeclaPresionadaJugador1( &ev, &key, &Ini, &ObjetoFrog, VecFrog );
+				break;
+			case ALLEGRO_EVENT_KEY_DOWN:
+				fprintf(stderr, "\n \n \t\t Apretaste algo... \n");
+				TeclaPresionadaJugador1( &ev, &key, &Ini, &ObjetoFrog, VecFrog );
+				//Jugador1ApretoFlecha(&ev, &key, &resting_timer, &ObjetoFrog, &Ini, VecFrog);
+				break;
+			case ALLEGRO_EVENT_KEY_UP:
+				TeclaSoltadaJugador1( &ev, &key );
+				//Jugador1SoltoFlecha(&ev, &key, &doexit, &resting_timer);
+				break;
+		}
+	} //Fin del Loop 
+	
+//( (SCREEN_H+0) / (MAX_BOUNCE_Y+1))

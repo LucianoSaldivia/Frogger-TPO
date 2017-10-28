@@ -4,10 +4,11 @@
 #include <allegro5/allegro_native_dialog.h>
 
 int AlDrawTodo(Objeto **, float, float);
+void CargarSprites( ALLEGRO_BITMAP **, const char *);
 
-int AlInitTodo(ALLEGRO_TIMER **, ALLEGRO_TIMER **, ALLEGRO_DISPLAY **, ALLEGRO_EVENT_QUEUE **, ALLEGRO_BITMAP**);
-void AlDestroyTodo(ALLEGRO_TIMER **, ALLEGRO_TIMER **, ALLEGRO_DISPLAY **, ALLEGRO_EVENT_QUEUE **, ALLEGRO_BITMAP**);
+int AlInitTodo(ALLEGRO_TIMER **, ALLEGRO_TIMER **, ALLEGRO_DISPLAY **, ALLEGRO_EVENT_QUEUE **, ALLEGRO_BITMAP ***, bool **);
+void AlDestroyTodo(ALLEGRO_TIMER **, ALLEGRO_TIMER **, ALLEGRO_DISPLAY **, ALLEGRO_EVENT_QUEUE **, ALLEGRO_BITMAP ***, bool **);
 
-int IniciarLista(Objeto **);
+int IniciarLista(Objeto **, Objeto **);
 void LiberarTodo(Objeto **);
 
