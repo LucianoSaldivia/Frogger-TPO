@@ -1,0 +1,105 @@
+Back	1	Imagenes/Background.png	0	0	0	0	0
+Tronco2	1	Imagenes/Tronco2.png	Der	1.7	40	186	0.000
+Tronco2	2	Imagenes/Tronco2.png	Der	1.7	40	186	260
+Tronco2	3	Imagenes/Tronco2.png	Der	1.7	40	186	260
+Tronco2	4	Imagenes/Tronco2.png	Der	1.7	40	186	260
+Tronco2	5	Imagenes/Tronco2.png	Der	1.7	40	186	260
+Tronco2	6	Imagenes/Tronco2.png	Der	1.7	40	186	260
+Tort2	1	Imagenes/Tortuga2.png	Izq	1	40	104	0.000
+Tort2	2	Imagenes/Tortuga2.png	Izq	1	40	104	146.000
+Tort2	3	Imagenes/Tortuga2.png	Izq	1	40	104	146.000
+Tort2	4	Imagenes/Tortuga2.png	Izq	1	40	104	146.000
+Tort2	5	Imagenes/Tortuga2.png	Izq	1	40	104	146.000
+Tort2	6	Imagenes/Tortuga2.png	Izq	1	40	104	146.000
+Tronco3	1	Imagenes/Tronco3.png	Der	1.4	40	284	0.000
+Tronco3	2	Imagenes/Tronco3.png	Der	1.4	40	284	398.000
+Tronco3	3	Imagenes/Tronco3.png	Der	1.4	40	284	398.000
+Tronco3	4	Imagenes/Tronco3.png	Der	1.4	40	284	398.000
+Tronco3	5	Imagenes/Tronco3.png	Der	1.4	40	284	398.000
+Tronco3	6	Imagenes/Tronco3.png	Der	1.4	40	284	398.000
+Tronco1	1	Imagenes/Tronco1.png	Der	2.1	40	85	0.000
+Tronco1	2	Imagenes/Tronco1.png	Der	2.1	40	136	190.000
+Tronco1	3	Imagenes/Tronco1.png	Der	2.1	40	136	190.000
+Tronco1	4	Imagenes/Tronco1.png	Der	2.1	40	136	190.000
+Tronco1	5	Imagenes/Tronco1.png	Der	2.1	40	136	190.000
+Tronco1	6	Imagenes/Tronco1.png	Der	2.1	40	136	190.000
+Tort3	1	Imagenes/Tortuga3.png	Izq	1.5	40	156	0.000
+Tort3	2	Imagenes/Tortuga3.png	Izq	1.5	40	156	220.000
+Tort3	3	Imagenes/Tortuga3.png	Izq	1.5	40	156	220.000
+Tort3	4	Imagenes/Tortuga3.png	Izq	1.5	40	156	220.000
+Tort3	5	Imagenes/Tortuga3.png	Izq	1.5	40	156	220.000
+Tort3	6	Imagenes/Tortuga3.png	Izq	1.5	40	156	220.000
+Auto1	1	Imagenes/Auto1.png	Izq	1	40	98	0.000
+Auto1	2	Imagenes/Auto1.png	Izq	1	40	98	140.000
+Auto1	3	Imagenes/Auto1.png	Izq	1	40	98	140.000
+Auto1	4	Imagenes/Auto1.png	Izq	1	40	98	140.000
+Auto1	5	Imagenes/Auto1.png	Izq	1	40	98	140.000
+Auto1	6	Imagenes/Auto1.png	Izq	1	40	98	140.000
+Auto2	1	Imagenes/Auto2.png	Der	3	40	50	0.000
+Auto2	2	Imagenes/Auto2.png	Der	3	40	50	130.000
+Auto2	3	Imagenes/Auto2.png	Der	3	40	50	130.000
+Auto2	4	Imagenes/Auto2.png	Der	3	40	50	130.000
+Auto2	5	Imagenes/Auto2.png	Der	3	40	50	130.000
+Auto2	6	Imagenes/Auto2.png	Der	3	40	50	130.000
+Auto3	1	Imagenes/Auto3.png	Izq	2	40	58	0.000
+Auto3	2	Imagenes/Auto3.png	Izq	2	40	58	160.000
+Auto3	3	Imagenes/Auto3.png	Izq	2	40	58	160.000
+Auto3	4	Imagenes/Auto3.png	Izq	2	40	58	160.000
+Auto3	5	Imagenes/Auto3.png	Izq	2	40	58	160.000
+Auto3	6	Imagenes/Auto3.png	Izq	2	40	58	160.000
+Auto4	1	Imagenes/Auto4.png	Der	4	40	50	0.000
+Auto4	2	Imagenes/Auto4.png	Der	4	40	50	200.000
+Auto4	3	Imagenes/Auto4.png	Der	4	40	50	200.000
+Auto4	4	Imagenes/Auto4.png	Der	4	40	50	200.000
+Auto4	5	Imagenes/Auto4.png	Der	4	40	50	200.000
+Auto4	6	Imagenes/Auto4.png	Der	4	40	50	200.000
+Auto5	1	Imagenes/Auto5.png	Izq	5	40	48	0.000
+Auto5	2	Imagenes/Auto5.png	Izq	5	40	48	160.000
+Auto5	3	Imagenes/Auto5.png	Izq	5	40	48	160.000
+Auto5	4	Imagenes/Auto5.png	Izq	5	40	48	160.000
+Auto5	5	Imagenes/Auto5.png	Izq	5	40	48	160.000
+Auto5	6	Imagenes/Auto5.png	Izq	5	40	48	160.000
+Frog	1	Imagenes/RanaArriba.png	0	0	50	50	0
+FIN	
+
+								ALERTA!
+								
+Despues de  "FIN" hay una TABULACION MUY IMPORTANTE,  NO BORRAR NI CAMBIAR !!!
+
++Info
+
+Objeto:
+Nombre Numero RutaImgInicial DirecciónMovimiento Velocidad Alto Ancho Dif_x
+
+
+Dif_x es Ancho de la imagen + Separación entre una y otra (La separación la definí como 5/12 del ancho de cada imagen)
+
+Nivel Facil	--> Velocidades cercana a 1, Espacios Autos > 3/4 ancho, Espacios Troncos y Tortugas c(1/3 ; 2/3) Ancho
+Nivel Intermedio --> Vel cercana a 2, Esp A = 1/2 Ancho, Esp TyT c (2/3 y 3/4) Ancho
+Nivel Dificil --> Vel cercana a 3, Esp A = 5/12 Ancho, Esp TyT c (3/4 ; 3/2) Ancho
+Nivel "Imposible" --> Vel > 4, Esp A < 1/3 Ancho, Esp TyT > 2 Ancho
+
+
+	while( /*FlagDeSalida == 0*/ 1 ){ //Loop del juego
+		ALLEGRO_EVENT ev;
+		al_wait_for_event(event_queue, &ev);
+		
+		if( ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE || ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE ) /*FlagDeSalida = 5*/ break;
+		else switch(ev.type){
+			case ALLEGRO_EVENT_TIMER:
+				if(ev.timer.source == frames_timer) MoverAmbiente(&Ini);
+				else if(ev.timer.source == resting_timer) TeclaPresionadaJugador1( &ev, &key, &Ini, &ObjetoFrog, VecFrog );
+				break;
+			case ALLEGRO_EVENT_KEY_DOWN:
+				fprintf(stderr, "\n \n \t\t Apretaste algo... \n");
+				TeclaPresionadaJugador1( &ev, &key, &Ini, &ObjetoFrog, VecFrog );
+				//Jugador1ApretoFlecha(&ev, &key, &resting_timer, &ObjetoFrog, &Ini, VecFrog);
+				break;
+			case ALLEGRO_EVENT_KEY_UP:
+				TeclaSoltadaJugador1( &ev, &key );
+				//Jugador1SoltoFlecha(&ev, &key, &doexit, &resting_timer);
+				break;
+		}
+	} //Fin del Loop 
+	
+//( (SCREEN_H+0) / (MAX_BOUNCE_Y+1))
