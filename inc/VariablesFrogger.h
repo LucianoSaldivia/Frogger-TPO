@@ -44,7 +44,7 @@ enum MisPosicionesFinales{
 #define Y_INI_FROG ( SCREEN_H - LOWER_OFFSET - FROG_SIZE )
 #define X_INI_FROG ( ( SCREEN_W / 2.0 )  - ( FROG_SIZE / 2.0 ) )
 #define DIF_FROG_COSA 4
-#define FROG_TRANSPARENCY_PIX 10
+#define FROG_TRANSPARENCY_PIX 20
 #define BOUNCE_Y 50
 #define BOUNCE_X 50
 #define X_POS_1 28
@@ -68,7 +68,7 @@ enum MisPosicionesFinales{
 /* MENUS */
 #define ALTURA_LETRA_TITULO 58
 #define ALTURA_LETRA_OPCIONES 42
-#define ALTURA_LETRA_PUNTOS 20
+#define ALTURA_LETRA_PUNTOS 26
 #define ALTURA_LETRA_CHICA 10
 #define Y_TITULO 172
 #define Y_OPCIONES 332

@@ -95,14 +95,27 @@ void RedibujarDesde( Objeto **p_DesdeAca ){
 	}
 	al_flip_display(); //mostramos
 }
-
-void MostrarPuntos( ALLEGRO_FONT **FuentePuntos, int *p_Puntos ){
-	al_draw_textf( *(FuentePuntos), al_map_rgb( 0, 205, 50 ), 0, SCREEN_H - ALTURA_LETRA_PUNTOS - 5, ALLEGRO_ALIGN_LEFT, "%d", ( *(p_Puntos) ) );
-}
-
-void MostrarTodo( ALLEGRO_FONT **FuentePuntos, int *p_Puntos, Objeto **p_DesdeAca ){
-	RedibujarDesde( p_DesdeAca );
-	al_draw_textf( *(FuentePuntos), al_map_rgb( 0, 205, 50 ), 0, SCREEN_H - ALTURA_LETRA_PUNTOS - 5, ALLEGRO_ALIGN_LEFT, "%d", ( *(p_Puntos) ) );
+void RedibujarDesdeConTexto( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos ,int *p_Vidas ){
+	char Aux1[1000], Aux2[1000];
+	Objeto *Act;
+	
+	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
+	Act = *(p_DesdeAca);
+	while(Act != NULL){
+		al_draw_bitmap( Act->Imagen, Act->Pos_x, Act->Pos_y, 0 ); //dibujamos todo con 0 flags
+		Act = Act->Sig;
+	}
+	sprintf( Aux1, "%d", ( *p_Puntos ) );
+	strcpy( Aux2, " Score: " );
+	strcat( Aux2, Aux1 );
+	al_draw_text( *(FuentePuntos), al_map_rgb( 0, 0, 0 ), 0, 0, ALLEGRO_ALIGN_LEFT, Aux2 );
+	sprintf( Aux1, "%d", ( *p_Vidas ) );
+	strcpy( Aux2, "Vidas: " );
+	strcat( Aux2, Aux1 );
+	strcat( Aux2, " " );
+	al_draw_text( *(FuentePuntos), al_map_rgb( 0, 0, 0 ), SCREEN_W, 0, ALLEGRO_ALIGN_RIGHT, Aux2 );
+	
+	al_flip_display();
 }
 
 void DetectarColision( Objeto **p_Ini, Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER **p_died_timer, int *Vidas, bool *EstadoFrog ){

@@ -17,12 +17,11 @@
 char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	ALLEGRO_TIMER *resting_timer = NULL, *frames_timer = NULL, *sprites_timer = NULL, *died_timer = NULL;
 	ALLEGRO_BITMAP **VecFrog = NULL;
-	//ALLEGRO_FONT *FuentePuntos = NULL;
+	ALLEGRO_FONT *FuentePuntos = NULL;
 	Objeto *Ini = NULL, *ObjetoFrog = NULL, /*aaaaaaa*/*Act = NULL;
 	bool *key = NULL, EstadoFrog = VIVO;
 	char Flag = CONTINUAR, Direccion = NO_HAY_DIRECCION, ContadorSprites = 0, *PosicionesFinales = NULL;
-	int Vidas = CANT_VIDAS_INICIALES;
-	int Puntos = 0;
+	int Vidas = CANT_VIDAS_INICIALES, Puntos = 0;
 	
 	if( Inicializar1vsC( p_event_queue, &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales ) == ERROR ){
 		Finalizar1vsC( p_event_queue, &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
@@ -43,7 +42,7 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 	}
 	/*aaaaaaaaaaaaaaaaaaaaaaaa*/
 	
-	//FuentePuntos = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_PUNTOS, 0 );
+	FuentePuntos = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_PUNTOS, 0 );
 	al_start_timer( frames_timer );
 		
 	while( Flag != SALIR && Flag != VOLVER ){							// VOLVER = VOLVER AL MENU PRINCIPAL
@@ -67,9 +66,7 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 					if( Vidas == 0 ) Flag = FIN;
 					MoverTodo( &Ini, &ObjetoFrog );
 					if( ObjetoFrog->Pos_y == UPPER_OFFSET ) Flag = LeerPosFinal( &ObjetoFrog, PosicionesFinales );
-					RedibujarDesde( &Ini );
-					//MostrarPuntos( &FuentePuntos, &Puntos );
-					//MostrarTodo( &FuentePuntos, &Puntos, &Ini );
+					RedibujarDesdeConTexto( &Ini, &FuentePuntos, &Puntos, &Vidas );
 				}
 				else if( ev.timer.source == died_timer ){
 					RevivirFrog1( &ObjetoFrog, VecFrog, &died_timer, &EstadoFrog );
@@ -116,7 +113,7 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 	MenuPuntajes( p_event_queue );
 	
 	Finalizar1vsC( p_event_queue, &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
-	//al_destroy_font( FuentePuntos );
+	al_destroy_font( FuentePuntos );
 	LiberarMemoria( &Ini );
 	
 	return Flag;

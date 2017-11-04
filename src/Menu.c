@@ -232,7 +232,7 @@ char MenuPausa( ALLEGRO_DISPLAY **p_display ){
 	ALLEGRO_BITMAP *MenuPausa = NULL;
 	char Retornar = -10;
 	
-	MenuPausa = al_load_bitmap( "Imagenes/MenuPausa.png" );
+	MenuPausa = al_load_bitmap( "Imagenes/MenuPausa1.png" );
 	
 	Eventos_Pausa = al_create_event_queue(); 		//creamos cola de eventos
 	if( ! Eventos_Pausa ) {

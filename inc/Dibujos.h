@@ -7,6 +7,7 @@
 
 void DibujarParaMenu( ALLEGRO_BITMAP **MenuBack, ALLEGRO_BITMAP **Frog, ALLEGRO_FONT **FuenteTitulo, ALLEGRO_FONT **FuenteOpciones, ALLEGRO_FONT **FuenteAclaraciones, const char *TipoDeMenu, int Pos_x, int Pos_y );
 void RedibujarDesde( Objeto **p_DesdeAca );
+void RedibujarDesdeConTexto( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos ,int *p_Vidas );
 void MostrarPuntos( ALLEGRO_FONT **FuentePuntos, int *p_Puntos );
 void MostrarTodo( ALLEGRO_FONT **FuentePuntos, int *p_Puntos, Objeto **p_DesdeAca );
 
