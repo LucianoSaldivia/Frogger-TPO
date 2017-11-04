@@ -101,7 +101,7 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 					else{
 						al_stop_timer( sprites_timer );
 						ContadorSprites = 0;
-						if( Direccion == ARRIBA ) Puntos += 10;
+						if( Direccion == ARRIBA ) Puntos += 150;
 						Direccion = NO_HAY_DIRECCION;
 					}
 				}
@@ -112,8 +112,8 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 		else if( Flag == FIN ) break;
 		al_flush_event_queue( *(p_event_queue) );
 	}
-	/*if( Flag == FIN ) MenuPuntajes;*/
-	/* Menu para agregar puntaje obtenido */
+	//if( Flag == FIN ) Flag = MenuNuevoPuntaje( &event_queue );
+	MenuPuntajes( p_event_queue );
 	
 	Finalizar1vsC( p_event_queue, &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
 	//al_destroy_font( FuentePuntos );
