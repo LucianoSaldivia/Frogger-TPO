@@ -103,9 +103,6 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 						if( ContadorSprites == CANT_SPRITES ) {
 							al_stop_timer( sprites_timer );
 							ContadorSprites = 0;
-							/*MAGIA PARA PROBAR*/
-							Flag = FIN_GANO;
-							/*MAGIA PARA PROBAR*/
 							if( Direccion == ARRIBA ) Puntos += PUNTOS_POR_SALTO;
 							Direccion = NO_HAY_DIRECCION;
 						}
