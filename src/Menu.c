@@ -314,7 +314,7 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int *p_Punto
 	sprintf( Aux1, "%d", ( *p_Puntos ) );
 	strcpy( Aux2, " Tu puntaje final: " );
 	strcat( Aux2, Aux1 );
-	al_draw_text( Fuente, al_map_rgb( 0, 0, 0 ), ( ( SCREEN_W / 2 ) - 130 ) , 90, ALLEGRO_ALIGN_LEFT, Aux2 );
+	al_draw_text( Fuente, al_map_rgb( 0, 0, 0 ), ( SCREEN_W / 2 ), 0, ALLEGRO_ALIGN_CENTRE, Aux2 );
 	
 	al_flip_display();
 	
@@ -555,7 +555,7 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int *p_Punto
 		al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, Titulo );
 		
 		Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_PUNTOS, 0 );
-		al_draw_text( Fuente, al_map_rgb( 0, 0, 0 ), ( ( SCREEN_W / 2 ) - 130 ) , 90, ALLEGRO_ALIGN_LEFT, Aux2 );
+		al_draw_text( Fuente, al_map_rgb( 0, 0, 0 ), ( SCREEN_W / 2 ), 0, ALLEGRO_ALIGN_CENTRE, Aux2 );
 		
 		Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
 		al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), ( 350 + ALTURA_LETRA_OPCIONES ) , ALLEGRO_ALIGN_CENTRE, Nombre );
@@ -634,17 +634,20 @@ char GuardarOrdenadoEnArchivo( char *NewNombre, int *p_Puntos, const char *RutaA
 	fclose( fp );
 	
 	Act = Ini;																				/* Ponemos Nuestro Struct Puntaje NUEVO en la lista de forma ordenada */
-	while( Act!= NULL && New->Sig == NULL ){
-		if( New->Puntos >= Act->Puntos && Act == Ini ){
-			New->Sig = Ini;
+	while( Act != NULL ){
+		if( New->Puntos >= Ini->Puntos ){
 			Ini = New;
-		}
-		else if( NewPuntos >= Act->Puntos ){
 			New->Sig = Act;
-			Ant = New;
+			break;
 		}
-		if( Act->Sig == NULL ){
+		else if( New->Puntos >= Act->Puntos ){
+			New->Sig = Act;
+			Ant->Sig = New;
+			break;
+		}
+		else if( Act->Sig == NULL ){
 			Act->Sig = New;
+			New->Sig = NULL;
 		}
 		Ant = Act;
 		Act = Act->Sig;

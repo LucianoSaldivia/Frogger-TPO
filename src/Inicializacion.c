@@ -167,15 +167,14 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	PosicionesFinales[POS_5] = VACIA;
 }
 
-void Finalizar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer, ALLEGRO_TIMER **p_died_timer, ALLEGRO_BITMAP ***p_VecFrog, bool **p_key, char **p_PosicionesFinales ){
+void Finalizar1vsC( ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer, ALLEGRO_TIMER **p_died_timer, ALLEGRO_BITMAP ***p_VecFrog, bool **p_key, char **p_PosicionesFinales ){
 	al_destroy_timer( *(p_resting_timer) );
 	al_destroy_timer( *(p_frames_timer) );
 	al_destroy_timer( *(p_sprites_timer) );
 	al_destroy_timer( *(p_died_timer) );
-	if( *(p_VecFrog) != NULL ) free( *(p_VecFrog) ); 
-	if( *(p_key) != NULL ) free( *(p_key) );
-	if( *(p_PosicionesFinales) != NULL ) free( *(p_PosicionesFinales) );
-		
+	free( *(p_VecFrog) );
+	free( *(p_key) );
+	free( *(p_PosicionesFinales) );
 }
 
 

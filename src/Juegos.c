@@ -24,12 +24,12 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 	int Vidas = CANT_VIDAS_INICIALES, Puntos = 0;
 	
 	if( Inicializar1vsC( p_event_queue, &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales ) == ERROR ){
-		Finalizar1vsC( p_event_queue, &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
+		Finalizar1vsC( &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
 		return ERROR;		
 	}
 	
 	if( AlistarObjetos( &Ini, &ObjetoFrog, "Archivos/Objetos1vsC.txt" ) == ERROR ){
-		Finalizar1vsC( p_event_queue, &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
+		Finalizar1vsC( &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
 		LiberarMemoria( &Ini );
 		return ERROR;
 	}
@@ -122,7 +122,7 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 	
 	al_destroy_font( FuentePuntos );
 	LiberarMemoria( &Ini );
-	Finalizar1vsC( p_event_queue, &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
+	Finalizar1vsC( &resting_timer, &frames_timer, &sprites_timer, &died_timer, &VecFrog, &key, &PosicionesFinales );
 	
 	return Flag;
 }

@@ -1,4 +1,8 @@
-Lucho	17100
-PruebaTres	150
-PruebaDos	150
-PruebaUno	150
+Ultima	5700
+Prueba Menos 1	2550
+Otra prueba mas	450
+Prueba Menos 2	450
+Prueba Zero	450
+Prueba Tres	150
+Prueba Dos	150
+Prueba Uno	150
