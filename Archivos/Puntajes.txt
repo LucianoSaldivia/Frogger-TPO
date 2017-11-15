@@ -1,0 +1,4 @@
+Jugador 2	150
+Prueba Dos	150
+Prueba Uno	150
+Prueba Tres	0
