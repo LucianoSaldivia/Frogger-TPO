@@ -32,6 +32,7 @@ int main(int argc, char **argv)
    bool key[4] = { false, false, false, false };
    bool redraw = true;
    bool doexit = false;
+   bool HuboEventos = false;
  
     /*************************
      * Variables de Server TCP
@@ -143,6 +144,8 @@ int main(int argc, char **argv)
       ALLEGRO_EVENT ev;
       al_wait_for_event(event_queue, &ev);
  
+      HuboEventos = false;
+
       if(ev.type == ALLEGRO_EVENT_TIMER) {
          if(key[KEY_UP] && bouncer_y >= 4.0) {
             bouncer_y -= 4.0;
@@ -166,54 +169,57 @@ int main(int argc, char **argv)
       } else if(ev.type == ALLEGRO_EVENT_KEY_DOWN) {
          switch(ev.keyboard.keycode) {
             case ALLEGRO_KEY_UP:
-               tmp.T_arriba = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
+               key[KEY_UP] = true;
+               HuboEventos = true;
                break; 
             case ALLEGRO_KEY_DOWN:
-               tmp.T_abajo = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
+               key[KEY_DOWN] = true;
+               HuboEventos = true;
                break; 
             case ALLEGRO_KEY_LEFT: 
-               tmp.T_izquierda = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
+               key[KEY_LEFT] = true;
+               HuboEventos = true;
                break;
             case ALLEGRO_KEY_RIGHT:
-               tmp.T_derecha = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
+               key[KEY_RIGHT] = true;
+               HuboEventos = true;
                break;
          }
       } else if(ev.type == ALLEGRO_EVENT_KEY_UP) {
          switch(ev.keyboard.keycode) {
             case ALLEGRO_KEY_UP:
-               tmp.T_arriba = false;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
-               break;
+               key[KEY_UP] = false;
+               HuboEventos = true;
+               break; 
             case ALLEGRO_KEY_DOWN:
-               tmp.T_abajo = false;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
-               break;
+               key[KEY_DOWN] = false;
+               HuboEventos = true;
+               break; 
             case ALLEGRO_KEY_LEFT: 
-               tmp.T_izquierda = false;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
-               break; 
+               key[KEY_LEFT] = false;
+               HuboEventos = true;
+               break;
             case ALLEGRO_KEY_RIGHT:
-               tmp.T_derecha = false;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
-               break; 
-            case ALLEGRO_KEY_ESCAPE:
-               doexit = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
+               key[KEY_RIGHT] = false;
+               HuboEventos = true;
                break;
          }
       }
- 
-      if(redraw && al_is_event_queue_empty(event_queue)) {
-         redraw = false;
-
-         al_clear_to_color(al_map_rgb(0,0,0));
-         al_draw_bitmap(bouncer, bouncer_x, bouncer_y, 0);
-         al_flip_display();
+      if( HuboEventos ){
+        tmp.T_arriba = key[KEY_UP];
+        tmp.T_abajo = key[KEY_DOWN];
+        tmp.T_izquierda = key[KEY_LEFT];
+        tmp.T_derecha = key[KEY_RIGHT];
+        send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
       }
+  
+      // if(redraw && al_is_event_queue_empty(event_queue)) {
+      //    redraw = false;
+
+      //    al_clear_to_color(al_map_rgb(0,0,0));
+      //    al_draw_bitmap(bouncer, bouncer_x, bouncer_y, 0);
+      //    al_flip_display();
+      // }
    }
  
    al_destroy_bitmap(bouncer);

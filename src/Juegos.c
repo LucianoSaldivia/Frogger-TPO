@@ -347,12 +347,13 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 			}
 			
 			else if( ev.type == ALLEGRO_EVENT_KEY_UP ){
-				JugadorSoltoTecla( &ev, key, &resting_timer_1, &resting_timer_2 );
+				Jugador1SoltoTecla( &ev, key, &resting_timer_1 );
 			}
 			
 			else if( ev.type == ALLEGRO_EVENT_TIMER ){
 				if( ev.timer.source == frames_timer ){
 					LeerDelSocket(socketfd, key, &resting_timer_2, &sprites_timer_2 );
+					printf( "%d %d %d %d \n", key[KEY_2_UP], key[KEY_2_DOWN], key[KEY_2_LEFT], key[KEY_2_RIGHT] );
 					if( Vidas_1 == 0 ) Flag = FIN_PERDIO;
 					else if( Vidas_2 == 0 ) Flag = FIN_GANO;
 					MoverTodo1vs1( &Ini, &ObjetoFrog_1, &ObjetoFrog_2 );
