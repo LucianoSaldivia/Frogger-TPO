@@ -101,3 +101,8 @@ typedef struct Puntaje{
 	struct Puntaje *Sig;
 }Puntaje;
 
+typedef struct Teclas_2
+{
+	bool T_arriba,T_abajo, T_izquierda, T_derecha
+};
+

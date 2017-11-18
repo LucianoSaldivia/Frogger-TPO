@@ -52,3 +52,12 @@ int CrearSocket(int puerto){
     return clientfd;
 
 }
+
+void LeerDelSocket(int sockfd, bool *key) {
+    Teclas_2 tmp;
+    recv(sockfd, tmp, sizeof(tmp), MSG_DONTWAIT);
+    key[KEY_2_UP] = tmp.T_arriba;
+    key[KEY_2_DOWN] = tmp.T_abajo;
+    key[KEY_2_LEFT] = tmp.T_izquierda;
+    key[KEY_2_RIGHT] = tmp.T_derecha;
+}

@@ -12,6 +12,7 @@
 #include "../inc/Saltos.h"
 #include "../inc/Dibujos.h"
 #include "../inc/Menu.h"
+#include "../inc/Sockets.h"
 
 char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	ALLEGRO_TIMER *resting_timer = NULL, *frames_timer = NULL, *sprites_timer = NULL, *died_timer = NULL;
@@ -59,6 +60,7 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 			
 			else if( ev.type == ALLEGRO_EVENT_TIMER ){
 				if( ev.timer.source == frames_timer ){
+					LeerDelSocket(socketfd, key);
 					if( Vidas == 0 ) Flag = FIN_PERDIO;
 					MoverTodo( &Ini, &ObjetoFrog );
 					if( EstadoFrog == VIVO ) DetectarColision( &Ini, &ObjetoFrog, VecFrog, &died_timer, &Vidas, &EstadoFrog, ContadorSprites );
