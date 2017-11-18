@@ -27,8 +27,7 @@ int main(int argc, char *argv[]){
 			Flag = Juego1vs1_OFFLINE( &display, &event_queue ); 		// Devuelve SALIR ,VOLVER o ERROR
 		}
 		else if( Flag == OvsO_ONLINE ){
-			fprintf(stdout, "\n Estoy en OvsO ONLINE \n");
-			//Flag = Juego1vs1_ONLINE( &display, &event_queue ); 		// Devuelve SALIR ,VOLVER o ERROR
+			Flag = Juego1vs1_ONLINE( &display, &event_queue ); 		// Devuelve SALIR ,VOLVER o ERROR
 		}
 	}
 	DestruirGenerico( &display, &event_queue );
