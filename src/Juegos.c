@@ -295,11 +295,13 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 	bool *key = NULL, EstadoFrog_1 = VIVO, EstadoFrog_2 = VIVO;
 	char Flag = CONTINUAR, Direccion_1 = NO_HAY_DIRECCION, Direccion_2 = NO_HAY_DIRECCION, ContadorSprites_1 = 0, ContadorSprites_2 = 0, *PosicionesFinales = NULL, PosicionesOcupadas_1 = 0, PosicionesOcupadas_2 = 0;
 	int Vidas_1 = CANT_VIDAS_INICIALES, Vidas_2 = CANT_VIDAS_INICIALES, Puntos_1 = 0, Puntos_2 = 0;
-	int fd;
+	int socketfd;
+	int puerto = 3000;
+	// int puerto = ingresepuerto(funciones_de_Allegro());
 	
 	if( Inicializar1vs1( p_event_queue, &resting_timer_1, &resting_timer_2, &frames_timer, &sprites_timer_1, &sprites_timer_2, &died_timer_1, &died_timer_2, &VecFrog, &key, &PosicionesFinales ) == ERROR ) return ERROR;
 
-	if( (fd = Sockets(p_display, p_event_queue)) == ERROR){
+	if( (socketfd = CrearSocket(puerto)) == ERROR){
 		Finalizar1vs1( &resting_timer_1, &resting_timer_2, &frames_timer, &sprites_timer_1, &sprites_timer_2, &died_timer_1, &died_timer_2, VecFrog, &key, &PosicionesFinales );
 		return ERROR;
 	}

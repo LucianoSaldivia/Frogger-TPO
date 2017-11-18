@@ -21,15 +21,14 @@
 
 
 
-int Sockets(ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+int CrearSocket(int puerto){
 
 	const int uno=1;
-	int numport = 3000;
     struct sockaddr_in serverAddress;
-    struct sockaddr_in clientAddress;
-    socklen_t clientAddressLen;
     int sockfd;
     int clientfd;
+    struct sockaddr_in clientAddress;
+    socklen_t clientAddressLen;
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if(sockfd==-1) return ERROR;
@@ -40,7 +39,7 @@ int Sockets(ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	// cargamos parametros del socket
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = INADDR_ANY;
-    serverAddress.sin_port = htons(numport);
+    serverAddress.sin_port = htons(puerto);
     memset((&serverAddress.sin_zero), 0, 8);
 
 	// bindeamos el puerto y escuchamos
@@ -50,6 +49,6 @@ int Sockets(ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
     	return ERROR;
     clientfd = accept(sockfd, (struct sockaddr *)&clientAddress, &clientAddressLen);
     if(clientfd < 0) return ERROR;
-
     return clientfd;
+
 }
