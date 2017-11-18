@@ -167,42 +167,42 @@ int main(int argc, char **argv)
          switch(ev.keyboard.keycode) {
             case ALLEGRO_KEY_UP:
                tmp.T_arriba = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break; 
             case ALLEGRO_KEY_DOWN:
                tmp.T_abajo = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break; 
             case ALLEGRO_KEY_LEFT: 
                tmp.T_izquierda = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break;
             case ALLEGRO_KEY_RIGHT:
                tmp.T_derecha = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break;
          }
       } else if(ev.type == ALLEGRO_EVENT_KEY_UP) {
          switch(ev.keyboard.keycode) {
             case ALLEGRO_KEY_UP:
                tmp.T_arriba = false;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break;
             case ALLEGRO_KEY_DOWN:
                tmp.T_abajo = false;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break;
             case ALLEGRO_KEY_LEFT: 
                tmp.T_izquierda = false;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break; 
             case ALLEGRO_KEY_RIGHT:
                tmp.T_derecha = false;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break; 
             case ALLEGRO_KEY_ESCAPE:
                doexit = true;
-               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT)
+               send(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT);
                break;
          }
       }

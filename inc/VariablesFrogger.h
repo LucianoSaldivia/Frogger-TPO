@@ -103,6 +103,6 @@ typedef struct Puntaje{
 
 typedef struct Teclas_2
 {
-	bool T_arriba,T_abajo, T_izquierda, T_derecha
-};
+	bool T_arriba,T_abajo, T_izquierda, T_derecha;
+} Teclas_2;
 

@@ -11,8 +11,8 @@ enum MYKEYS {
 
 typedef struct Teclas_2
 {
-    bool T_arriba,T_abajo, T_izquierda, T_derecha
-} Teclas_2G;
+    bool T_arriba,T_abajo, T_izquierda, T_derecha;
+} Teclas_2;
 
 void error(const char *msg)
 {

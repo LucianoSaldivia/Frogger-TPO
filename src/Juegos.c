@@ -60,7 +60,6 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 			
 			else if( ev.type == ALLEGRO_EVENT_TIMER ){
 				if( ev.timer.source == frames_timer ){
-					LeerDelSocket(socketfd, key);
 					if( Vidas == 0 ) Flag = FIN_PERDIO;
 					MoverTodo( &Ini, &ObjetoFrog );
 					if( EstadoFrog == VIVO ) DetectarColision( &Ini, &ObjetoFrog, VecFrog, &died_timer, &Vidas, &EstadoFrog, ContadorSprites );
@@ -353,6 +352,7 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 			
 			else if( ev.type == ALLEGRO_EVENT_TIMER ){
 				if( ev.timer.source == frames_timer ){
+					LeerDelSocket(socketfd, key, &resting_timer_2, &sprites_timer_2 );
 					if( Vidas_1 == 0 ) Flag = FIN_PERDIO;
 					else if( Vidas_2 == 0 ) Flag = FIN_GANO;
 					MoverTodo1vs1( &Ini, &ObjetoFrog_1, &ObjetoFrog_2 );

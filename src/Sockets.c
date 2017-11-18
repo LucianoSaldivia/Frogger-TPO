@@ -53,11 +53,28 @@ int CrearSocket(int puerto){
 
 }
 
-void LeerDelSocket(int sockfd, bool *key) {
+void dumpteclas(Teclas_2 tmp) {
+    if(tmp.T_arriba) {
+        fprintf(stderr, "T_arriba");
+    }
+    if(tmp.T_abajo) {
+        fprintf(stderr, "T_abajo");
+    }
+    if(tmp.T_izquierda) {
+        fprintf(stderr, "T_izquierda");
+    }
+    if(tmp.T_derecha) {
+        fprintf(stderr, "T_derecha");
+    }
+}
+void LeerDelSocket(int sockfd, bool *key, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_sprites_timer ) {
     Teclas_2 tmp;
-    recv(sockfd, tmp, sizeof(tmp), MSG_DONTWAIT);
-    key[KEY_2_UP] = tmp.T_arriba;
-    key[KEY_2_DOWN] = tmp.T_abajo;
-    key[KEY_2_LEFT] = tmp.T_izquierda;
-    key[KEY_2_RIGHT] = tmp.T_derecha;
+    if( recv(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT) != 0 ){
+        dumpteclas(tmp);
+        key[KEY_2_UP] = tmp.T_arriba;
+        key[KEY_2_DOWN] = tmp.T_abajo;
+        key[KEY_2_LEFT] = tmp.T_izquierda;
+        key[KEY_2_RIGHT] = tmp.T_derecha;
+        InicializarTimers( p_resting_timer, p_sprites_timer );
+    }
 }
