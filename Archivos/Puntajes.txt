@@ -1,9 +1,4 @@
-eaaa	7350
-bu	2250
-nbuuu	1500
 Jugador 2	150
 Prueba Dos	150
 Prueba Uno	150
-jea	0
-Hola	0
 Prueba Tres	0
