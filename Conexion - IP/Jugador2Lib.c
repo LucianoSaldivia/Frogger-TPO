@@ -66,7 +66,7 @@ char MenuPedir( ALLEGRO_DISPLAY **p_display, char *Output, const char *Titulo ){
 	Eventos = al_create_event_queue(); 		//creamos cola de eventos
 		if( ! Eventos ) return ERROR;
 	memset( Output, '\0', strlen( Output ) * sizeof( char ) );
-	MenuFinJuego = al_load_bitmap( "Imagenes/MenuBack.png" );
+	MenuFinJuego = al_load_bitmap( "../Imagenes/MenuBack.png" );
 		if( ! MenuFinJuego ) {
 			al_destroy_event_queue( Eventos );
 			return ERROR;
@@ -78,10 +78,10 @@ char MenuPedir( ALLEGRO_DISPLAY **p_display, char *Output, const char *Titulo ){
 	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
 	al_draw_bitmap( MenuFinJuego, 0, 0, 0 );
 		
-	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
+	Fuente = al_load_ttf_font( "../Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
 	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, Titulo );
 	
-	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
+	Fuente = al_load_ttf_font( "../Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
 	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), ( 350 + ALTURA_LETRA_OPCIONES ) , ALLEGRO_ALIGN_CENTRE, Output );
 	
 	al_flip_display();
@@ -187,10 +187,10 @@ char MenuPedir( ALLEGRO_DISPLAY **p_display, char *Output, const char *Titulo ){
 			al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
 			al_draw_bitmap( MenuFinJuego, 0, 0, 0 );
 			
-			Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
+			Fuente = al_load_ttf_font( "../Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
 			al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, Titulo );
 			
-			Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
+			Fuente = al_load_ttf_font( "../Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
 			al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), ( 350 + ALTURA_LETRA_OPCIONES ) , ALLEGRO_ALIGN_CENTRE, Output );
 			
 			al_flip_display();
