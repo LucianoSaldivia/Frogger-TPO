@@ -9,8 +9,8 @@
 #include "../inc/VariablesFrogger.h"
 #include "../inc/Inicializacion.h"
 #include "../inc/Dibujos.h"
-
-char InicioGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+/*   Genericos   */
+char InicioGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Inicializa lo necesario para todos los juegos y menus
 	
 	if( ! al_init() ){
 		fprintf(stderr, "failed to initialize allegro!\n");
@@ -37,26 +37,26 @@ char InicioGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_
 		return ERROR;
 	}
 		
-	*(p_event_queue) = al_create_event_queue(); 		//creamos cola de eventos
+	*(p_event_queue) = al_create_event_queue();
 	if( ! (*p_event_queue) ) {
 		al_destroy_display( *(p_display) );
 		fprintf(stderr, "failed to create event_queue!\n");
 		return ERROR;
 	}
 	
-	al_register_event_source( (*p_event_queue), al_get_display_event_source(*p_display) ); //conectamos eventos de la pantalla 
+	al_register_event_source( (*p_event_queue), al_get_display_event_source(*p_display) );
 	al_register_event_source( (*p_event_queue), al_get_keyboard_event_source() );
 	
 	return 0;
 }
 
-void DestruirGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+void DestruirGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Finaliza y destruye todo lo inicializado por InicioGenerico
 	al_destroy_display( *(p_display) );
 	al_destroy_event_queue( *(p_event_queue) );
 }
 
 
-void TerminarDeAcomodarLista( Objeto **p_Ini ){
+void TerminarDeAcomodarLista( Objeto **p_Ini ){	// Ajusta las posiciones iniciales de los objetos
 	Objeto *Act;
 	
 	Act = *p_Ini;
@@ -74,7 +74,7 @@ void TerminarDeAcomodarLista( Objeto **p_Ini ){
 	}
 }
 
-void LiberarMemoria( Objeto **p_Ini ){
+void LiberarMemoria( Objeto **p_Ini ){	// Elimina la lista de objetos, y todo lo que contienen sus nodos
 	Objeto *Act, *Ant;
 	
 	Act = *(p_Ini);
@@ -88,14 +88,16 @@ void LiberarMemoria( Objeto **p_Ini ){
 	}
 }
 
-void InicializarTimers( ALLEGRO_TIMER **p_timer1, ALLEGRO_TIMER **p_timer2 ){
+void InicializarTimers( ALLEGRO_TIMER **p_timer1, ALLEGRO_TIMER **p_timer2 ){	// Inicializa 2 timers
 	al_start_timer(*p_timer1);		
 	al_start_timer(*p_timer2);	
 }
 
-
+/*   1vsC   */
 
 char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer, ALLEGRO_TIMER **p_died_timer, ALLEGRO_BITMAP ***p_VecFrog, bool **p_key, char **p_PosicionesFinales ){	
+	// Inicializa lo necesario para 1vsC
+	
 	*(p_resting_timer) = al_create_timer(FROG_RESTING_TIME);
 	if( ! (*p_resting_timer) ) {
 		fprintf(stderr, "failed to create timer!\n");
@@ -171,7 +173,7 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	return CONTINUAR;
 }
 
-	void CargarSprites1vsC( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora ){
+	void CargarSprites1vsC( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora ){	// Carga las imagenes de todas las posiciones la rana
 	char RutaFinal[100];
 	ALLEGRO_BITMAP **VecFrog = *(p_VecFrog);
 	RutaFinal[0] = '\0';
@@ -205,7 +207,7 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	VecFrog[8] = al_load_bitmap(RutaFinal);
 }	
 
-	void CargarKey1vsC( bool **p_key ){
+	void CargarKey1vsC( bool **p_key ){	// Inicializa los flags de las teclas
 	bool *key = *(p_key);
 	
 	key[KEY_UP] = false;
@@ -214,7 +216,7 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	key[KEY_RIGHT] = false;	
 }
 
-	void CargarPosicionesFinales1vsC( char **p_PosicionesFinales ){
+	void CargarPosicionesFinales1vsC( char **p_PosicionesFinales ){	// Inicializamos flags para las Posiciones Finales 
 	char *PosicionesFinales;
 	PosicionesFinales = *(p_PosicionesFinales);
 	
@@ -226,6 +228,8 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 }
 
 void Finalizar1vsC( ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer, ALLEGRO_TIMER **p_died_timer, ALLEGRO_BITMAP **VecFrog, bool **p_key, char **p_PosicionesFinales ){
+	// Finaliza y destruye todo lo inicializado por Inicializar1vsC
+	
 	int Contador;
 	al_destroy_timer( *(p_resting_timer) );
 	al_destroy_timer( *(p_frames_timer) );
@@ -239,7 +243,7 @@ void Finalizar1vsC( ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_ti
 	free( *(p_PosicionesFinales) );
 }
 
-char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *RutaArchivo ){
+char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *RutaArchivo ){	// Leemos archivo de Objetos para 1vsC y armamos la lista de objetos
 	FILE *fp;
 	Objeto *New;
 	char *Nombre, *Numero, *RutaImagen, *DirMov, *Velocidad, *Alto, *Ancho, *Dif_x;
@@ -365,10 +369,7 @@ char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *Rut
 		
 		if( strstr( RutaArchivo, "1vsC" ) != NULL ){
 			if( CargarDatosEnObjeto1vsC( New, Nombre, Numero, RutaImagen, DirMov, Velocidad, Alto, Ancho, Dif_x ) == ERROR ) return ERROR;
-		}/*
-		else if( strstr( RutaArchivo, "1vs1" ) != NULL ){						//ES IGUAL PARA 1vs1 sea ONLINE u OFFLINE
-			if( CargarDatosEnObjeto1vs1( New, Nombre, Numero, RutaImagen, DirMov, Velocidad, Alto, Ancho, Dif_x ) == ERROR ) return ERROR;
-		}*/
+		}
 		if( strstr(Nombre, "Frog") != NULL/* && atoi(Numero) == 1*/ ) *(p_ObjetoFrog) = New;
 		
 		fscanf( fp, "%[^\t]\t", Nombre );
@@ -393,6 +394,7 @@ char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *Rut
 }
 
 	char CargarDatosEnObjeto1vsC( Objeto *New, char *Nombre, char *Numero, char *RutaImagen, char *DirMov, char *Velocidad, char *Alto, char *Ancho, char *Dif_x ){
+	// Carga los datos de cada objeto en su correspondiente nodo de la lista de 1vsC
 	
 	New->Nombre = (char *) malloc( 10 * sizeof(char) );
 		if( New->Nombre == NULL ) return ERROR;
@@ -453,9 +455,11 @@ char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *Rut
 	return CONTINUAR;
 }
 
-
+/*   1vs1   */
 
 char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer_1, ALLEGRO_TIMER **p_sprites_timer_2, ALLEGRO_TIMER **p_died_timer_1, ALLEGRO_TIMER **p_died_timer_2, ALLEGRO_BITMAP ***p_VecFrog, bool **p_key, char **p_PosicionesFinales ){	
+	// Inicializa lo necesario para 1vs1 ONLINE y OFFLINE
+	
 	*(p_resting_timer_1) = al_create_timer(FROG_RESTING_TIME);
 		if( ! (*p_resting_timer_1) ) {
 			fprintf(stderr, "failed to create timer!\n");
@@ -575,7 +579,7 @@ char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	return CONTINUAR;
 }
 
-	void CargarSprites1vs1( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora ){
+	void CargarSprites1vs1( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora ){	// Carga las imagenes de todas las posiciones las 2 ranas
 	char RutaFinal[100];
 	ALLEGRO_BITMAP **VecFrog = *(p_VecFrog);
 	RutaFinal[0] = '\0';
@@ -633,7 +637,7 @@ char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	VecFrog[16] = al_load_bitmap(RutaFinal);
 }	
 
-	void CargarKey1vs1( bool **p_key ){
+	void CargarKey1vs1( bool **p_key ){	// Inicializa los flags de las teclas
 	bool *key = *(p_key);
 	
 	key[KEY_UP] = false;
@@ -658,6 +662,8 @@ char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 }
 
 void Finalizar1vs1( ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer_1, ALLEGRO_TIMER **p_sprites_timer_2, ALLEGRO_TIMER **p_died_timer_1, ALLEGRO_TIMER **p_died_timer_2, ALLEGRO_BITMAP **VecFrog, bool **p_key, char **p_PosicionesFinales ){
+	// Finaliza y destruye todo lo inicializado por Inicializar1vs1
+	
 	int Contador;
 	al_destroy_timer( *(p_resting_timer_1) );
 	al_destroy_timer( *(p_resting_timer_2) );
@@ -674,7 +680,7 @@ void Finalizar1vs1( ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting
 	free( *(p_PosicionesFinales) );
 }
 
-char AlistarObjetos1vs1( Objeto **p_Ini,  Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, const char *RutaArchivo ){
+char AlistarObjetos1vs1( Objeto **p_Ini,  Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, const char *RutaArchivo ){ // Leemos archivo de Objetos para 1vs1 y armamos la lista de objetos
 	FILE *fp;
 	Objeto *New;
 	char *Nombre, *Numero, *RutaImagen, *DirMov, *Velocidad, *Alto, *Ancho, *Dif_x;
@@ -838,6 +844,7 @@ char AlistarObjetos1vs1( Objeto **p_Ini,  Objeto **p_ObjetoFrog_1, Objeto **p_Ob
 }
 
 	char CargarDatosEnObjeto1vs1( Objeto *New, char *Nombre, char *Numero, char *RutaImagen, char *DirMov, char *Velocidad, char *Alto, char *Ancho, char *Dif_x ){
+	// Carga los datos de cada objeto en su correspondiente nodo de la lista de 1vs1
 	
 	New->Nombre = (char *) malloc( 10 * sizeof(char) );
 		if( New->Nombre == NULL ) return ERROR;

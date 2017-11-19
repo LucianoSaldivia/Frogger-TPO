@@ -14,7 +14,7 @@
 #include "../inc/Menu.h"
 #include "../inc/Sockets.h"
 
-char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Juego 1vsC
 	ALLEGRO_TIMER *resting_timer = NULL, *frames_timer = NULL, *sprites_timer = NULL, *died_timer = NULL;
 	ALLEGRO_BITMAP **VecFrog = NULL;
 	ALLEGRO_FONT *FuentePuntos = NULL;
@@ -121,7 +121,7 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 	return Flag;
 }
 
-char Juego1vs1_OFFLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+char Juego1vs1_OFFLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Juego 1vsC
 	ALLEGRO_TIMER *resting_timer_1 = NULL, *resting_timer_2 = NULL, *frames_timer = NULL, *sprites_timer_1 = NULL, *sprites_timer_2 = NULL, *died_timer_1 = NULL, *died_timer_2 = NULL;
 	ALLEGRO_BITMAP **VecFrog = NULL;
 	ALLEGRO_FONT *FuentePuntos = NULL;
@@ -285,7 +285,7 @@ char Juego1vs1_OFFLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_eve
 	return Flag;
 }
 
-char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Juego 1vsC
 	ALLEGRO_TIMER *resting_timer_1 = NULL, *resting_timer_2 = NULL, *frames_timer = NULL, *sprites_timer_1 = NULL, *sprites_timer_2 = NULL, *died_timer_1 = NULL, *died_timer_2 = NULL;
 	ALLEGRO_BITMAP **VecFrog = NULL;
 	ALLEGRO_FONT *FuentePuntos = NULL;
@@ -434,7 +434,6 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 				if( Aux == 100 ){
 					Flag = PAUSA;					
 				}
-				printf( "%d %d %d %d \n", key[KEY_2_UP], key[KEY_2_DOWN], key[KEY_2_LEFT], key[KEY_2_RIGHT] );
 				if( Direccion_2 == NO_HAY_DIRECCION && EstadoFrog_2 == VIVO){
 					if( key[KEY_2_UP] && ! key[KEY_2_DOWN] && ! key[KEY_2_LEFT] && ! key[KEY_2_RIGHT] ) Direccion_2 = ARRIBA;
 					if( key[KEY_2_DOWN] && ! key[KEY_2_UP] && ! key[KEY_2_LEFT] && ! key[KEY_2_RIGHT] ) Direccion_2 = ABAJO;

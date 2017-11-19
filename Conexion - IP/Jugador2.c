@@ -32,7 +32,7 @@ int main(int argc, char **argv){
 	char IPServer[20], StringPuerto[6];
 	struct sockaddr_in serv_addr;
 	struct hostent *server;
-	Teclas_2 tmp;
+	Teclas_2 NodoTeclas;
 	int puerto;
 	
 	/*************************
@@ -65,10 +65,10 @@ int main(int argc, char **argv){
 	* Listos para empezar el juego!
 	*/
 
-	tmp.T_arriba = false;
-	tmp.T_abajo = false;
-	tmp.T_izquierda = false;
-	tmp.T_derecha = false;
+	NodoTeclas.T_arriba = false;
+	NodoTeclas.T_abajo = false;
+	NodoTeclas.T_izquierda = false;
+	NodoTeclas.T_derecha = false;
 	
 	while(!doexit){
 		
@@ -132,12 +132,12 @@ int main(int argc, char **argv){
 		}
 		
 		if( HuboEventos ){
-			tmp.T_arriba = key[KEY_UP];
-			tmp.T_abajo = key[KEY_DOWN];
-			tmp.T_izquierda = key[KEY_LEFT];
-			tmp.T_derecha = key[KEY_RIGHT];
-			tmp.T_pausa = key[PAUSA_AUX];
-			send( sockfd, &tmp, sizeof( tmp ), MSG_DONTWAIT );
+			NodoTeclas.T_arriba = key[KEY_UP];
+			NodoTeclas.T_abajo = key[KEY_DOWN];
+			NodoTeclas.T_izquierda = key[KEY_LEFT];
+			NodoTeclas.T_derecha = key[KEY_RIGHT];
+			NodoTeclas.T_pausa = key[PAUSA_AUX];
+			send( sockfd, &NodoTeclas, sizeof( NodoTeclas ), MSG_DONTWAIT );
 		}			
 	}
 	

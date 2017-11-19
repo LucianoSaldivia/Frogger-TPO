@@ -19,9 +19,7 @@
 #include "../inc/Menu.h"
 #include "../inc/Sockets.h"
 
-
-
-int CrearSocket( int puerto ){
+int CrearSocket( int puerto ){	// Creamos el socket
 
 	const int uno=1;
 	struct sockaddr_in serverAddress;
@@ -51,23 +49,23 @@ int CrearSocket( int puerto ){
     return clientfd;
 }
 
-void dumpteclas( Teclas_2 tmp ) {
-    if(tmp.T_arriba) {
+void dumpteclas( Teclas_2 NodoTeclas ) {	// Funcion para probar la llegada de las teclas
+    if(NodoTeclas.T_arriba) {
         fprintf(stderr, "T_arriba = true\n");
     }else {
         fprintf(stderr, "T_arriba = false\n");
     }
-    if(tmp.T_abajo) {
+    if(NodoTeclas.T_abajo) {
         fprintf(stderr, "T_abajo = true\n");
     }else {
         fprintf(stderr, "T_abajo = false\n");
     }
-    if(tmp.T_izquierda) {
+    if(NodoTeclas.T_izquierda) {
         fprintf(stderr, "T_izquierda = true\n");
     }else {
         fprintf(stderr, "T_izquierda = false\n");
     }
-    if(tmp.T_derecha) {
+    if(NodoTeclas.T_derecha) {
         fprintf(stderr, "T_derecha = true\n");
     }else {
         fprintf(stderr, "T_derecha = false\n");
@@ -76,28 +74,28 @@ void dumpteclas( Teclas_2 tmp ) {
 
 int LeerDelSocket( int sockfd, bool *key, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_sprites_timer ) {
 	int Salida = 0;
-	Teclas_2 tmp;
+	Teclas_2 NodoTeclas;
 	bool key_ant[4] = {0};
     
-    tmp.T_arriba = false;
-	tmp.T_abajo = false;
-	tmp.T_izquierda = false;
-	tmp.T_derecha = false;
-	tmp.T_pausa = false;
+    NodoTeclas.T_arriba = false;
+	NodoTeclas.T_abajo = false;
+	NodoTeclas.T_izquierda = false;
+	NodoTeclas.T_derecha = false;
+	NodoTeclas.T_pausa = false;
 	
 	key_ant[KEY_UP] = key[KEY_2_UP];
 	key_ant[KEY_DOWN] = key[KEY_2_DOWN];
 	key_ant[KEY_LEFT] = key[KEY_2_LEFT];
 	key_ant[KEY_RIGHT] = key[KEY_2_RIGHT];
     
-	if( (Salida = recv(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT) ) > 0 ){
-		dumpteclas(tmp);
-		key[KEY_2_UP] = tmp.T_arriba;
-		key[KEY_2_DOWN] = tmp.T_abajo;
-		key[KEY_2_LEFT] = tmp.T_izquierda;
-		key[KEY_2_RIGHT] = tmp.T_derecha;
+	if( (Salida = recv(sockfd, &NodoTeclas, sizeof(NodoTeclas), MSG_DONTWAIT) ) > 0 ){
+		// dumpteclas(NodoTeclas);
+		key[KEY_2_UP] = NodoTeclas.T_arriba;
+		key[KEY_2_DOWN] = NodoTeclas.T_abajo;
+		key[KEY_2_LEFT] = NodoTeclas.T_izquierda;
+		key[KEY_2_RIGHT] = NodoTeclas.T_derecha;
 		
-		if( tmp.T_pausa ) return 100;
+		if( NodoTeclas.T_pausa ) return 100;
 		
 		if( key[KEY_2_UP] && ! key_ant[KEY_UP] ) InicializarTimers( p_resting_timer, p_sprites_timer );
 		if( key[KEY_2_DOWN] && ! key_ant[KEY_DOWN] ) InicializarTimers( p_resting_timer, p_sprites_timer );

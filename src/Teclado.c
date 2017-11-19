@@ -7,6 +7,8 @@
 #include "../inc/Teclado.h"
 
 char Jugador1ApretoTecla( ALLEGRO_EVENT *p_ev, bool *key, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_sprites_timer ){
+	// Seteamos flag de flechas y P
+	
 	char Flag = CONTINUAR;
 	
 	switch(p_ev->keyboard.keycode) {
@@ -34,6 +36,8 @@ char Jugador1ApretoTecla( ALLEGRO_EVENT *p_ev, bool *key, ALLEGRO_TIMER **p_rest
 }
 
 void Jugador1SoltoTecla( ALLEGRO_EVENT *p_ev, bool *key, ALLEGRO_TIMER **p_resting_timer ){
+	// Reseteamos flag de flechas y P
+	
 	switch(p_ev->keyboard.keycode) {
 		case ALLEGRO_KEY_UP:
 			key[KEY_UP] = false;
@@ -56,6 +60,8 @@ void Jugador1SoltoTecla( ALLEGRO_EVENT *p_ev, bool *key, ALLEGRO_TIMER **p_resti
 
 
 char JugadorApretoTecla( ALLEGRO_EVENT *p_ev, bool *key, ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_sprites_timer_1, ALLEGRO_TIMER **p_sprites_timer_2 ){
+	// Seteamos flag de flechas, W, A, S, D y P
+	
 	char Flag = CONTINUAR;
 	
 	switch(p_ev->keyboard.keycode) {
@@ -101,6 +107,8 @@ char JugadorApretoTecla( ALLEGRO_EVENT *p_ev, bool *key, ALLEGRO_TIMER **p_resti
 }
 
 void JugadorSoltoTecla( ALLEGRO_EVENT *p_ev, bool *key, ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting_timer_2 ){
+	// Reseteamos flag de flechas, W, A, S, D y P
+	
 	switch(p_ev->keyboard.keycode) {
 		case ALLEGRO_KEY_UP:
 			key[KEY_UP] = false;

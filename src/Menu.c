@@ -12,7 +12,7 @@
 #include "../inc/Dibujos.h"
 #include "../inc/Sockets.h"
 
-char Menu( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+char Menu( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Maneja todos los menus iniciales
 	char Flag = ERROR;
 	
 	while ( Flag != OvsC && Flag != OvsO_OFFLINE && Flag != OvsO_ONLINE ){
@@ -30,7 +30,7 @@ char Menu( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	return Flag;
 }
 
-char MenuPrincipal( ALLEGRO_EVENT_QUEUE **p_event_queue ){
+char MenuPrincipal( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos permite elegir Jugar, Ver Puntajes o Salir
 	ALLEGRO_BITMAP *MenuBack = NULL, *Frog = NULL;
 	ALLEGRO_FONT *FuenteTitulo = NULL, *FuenteOpciones = NULL, *FuenteAclaraciones = NULL;
 	static int Pos_x = 247, Pos_y = 326;
@@ -98,7 +98,7 @@ char MenuPrincipal( ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	return Retornar;
 }
 
-char MenuJugar( ALLEGRO_EVENT_QUEUE **p_event_queue ){
+char MenuJugar( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos permite elegir 1vsC, 1vs1 (OFFLINE) o 1vs1 (ONLINE)
 	ALLEGRO_BITMAP *MenuBack = NULL, *Frog = NULL;
 	ALLEGRO_FONT *FuenteTitulo = NULL, *FuenteOpciones = NULL, *FuenteAclaraciones = NULL;
 	int Pos_x = 239, Pos_y = 326;
@@ -179,7 +179,7 @@ char MenuJugar( ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	return Retornar;
 }
 
-char MenuPuntajes( ALLEGRO_EVENT_QUEUE **p_event_queue ){
+char MenuPuntajes( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos muestra los puntajes guardados en el archivo de puntajes
 	ALLEGRO_BITMAP *MenuBack = NULL, *Frog = NULL;
 	ALLEGRO_FONT *FuenteTitulo = NULL, *FuenteOpciones = NULL, *FuenteAclaraciones = NULL;
 	bool Volver = false;
@@ -225,21 +225,21 @@ char MenuPuntajes( ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	return Retornar;
 }
 
-char MenuPausa( ALLEGRO_DISPLAY **p_display ){
+char MenuPausa( ALLEGRO_DISPLAY **p_display ){	// Nos permite, seguir con el juego, volver al menu principal o salir
 	ALLEGRO_EVENT_QUEUE *Eventos_Pausa = NULL;
 	ALLEGRO_BITMAP *MenuPausa = NULL;
 	char Retornar = -10;
 	
 	MenuPausa = al_load_bitmap( "Imagenes/MenuPausa1.png" );
 	
-	Eventos_Pausa = al_create_event_queue(); 		//creamos cola de eventos
+	Eventos_Pausa = al_create_event_queue();
 	if( ! Eventos_Pausa ) {
 		fprintf(stderr, "failed to create event_queue!\n");
 		Retornar = SALIR;
 	}
 	
 	if( Retornar != SALIR ){
-		al_register_event_source( Eventos_Pausa, al_get_display_event_source( *(p_display) ) ); //conectamos eventos de la pantalla 
+		al_register_event_source( Eventos_Pausa, al_get_display_event_source( *(p_display) ) );
 		al_register_event_source( Eventos_Pausa, al_get_keyboard_event_source() );
 		
 		al_draw_bitmap( MenuPausa, 0, 0, 0 );
@@ -265,7 +265,7 @@ char MenuPausa( ALLEGRO_DISPLAY **p_display ){
 	return Retornar;	
 }
 
-char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, const char *Titulo ){	
+char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, const char *Titulo ){	// Nos pide nombre para guardar en un archivo nuestro puntaje
 	ALLEGRO_EVENT_QUEUE *Eventos_Nuevo_Puntaje;
 	ALLEGRO_FONT *Fuente = NULL;
 	ALLEGRO_BITMAP *MenuFinJuego = NULL;
@@ -286,7 +286,7 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 			free( Aux2 );
 			return ERROR;
 		}
-	Eventos_Nuevo_Puntaje = al_create_event_queue(); 		//creamos cola de eventos
+	Eventos_Nuevo_Puntaje = al_create_event_queue();
 		if( ! Eventos_Nuevo_Puntaje ) {
 			free( Aux1 );
 			free( Aux2 );
@@ -295,7 +295,7 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 		}
 	memset( Nombre, '\0', 100 * sizeof( char ) );
 	
-	al_register_event_source( Eventos_Nuevo_Puntaje, al_get_display_event_source( *(p_display) ) ); //conectamos eventos de la pantalla 
+	al_register_event_source( Eventos_Nuevo_Puntaje, al_get_display_event_source( *(p_display) ) );
 	al_register_event_source( Eventos_Nuevo_Puntaje, al_get_keyboard_event_source() );
 	
 	RedibujarDesde( p_Ini );
@@ -582,7 +582,7 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 	return Retornar;
 }
 
-	char GuardarOrdenadoEnArchivo( char *NewNombre, int Puntos, const char *RutaArchivo ){
+	char GuardarOrdenadoEnArchivo( char *NewNombre, int Puntos, const char *RutaArchivo ){	// Arma un struct con nuestro nombre y puntaje, y lo guarda en el archivo de puntaje
 	Puntaje *Ini = NULL, *Act = NULL, *Ant = NULL, *New = NULL;
 	FILE *fp;
 	char Retornar = CONTINUAR, *ActNombre, Aux[50];
@@ -678,7 +678,7 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 	return Retornar;
 }
 
-	void LiberarMemoriaDePuntos( Puntaje *Ini ){
+	void LiberarMemoriaDePuntos( Puntaje *Ini ){	// Destruimos la lista creada para ordenar puntaje nuevo
 	Puntaje *Act, *Ant = NULL;
 	
 	Act = Ini;
@@ -690,7 +690,7 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 	}
 }
 
-char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){
+char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){	// Nos pide el numero de puerto para realizar la conexion con el Jugador 2
 	ALLEGRO_EVENT_QUEUE *Eventos;
 	ALLEGRO_FONT *Fuente = NULL;
 	ALLEGRO_BITMAP *MenuFinJuego = NULL;
@@ -698,7 +698,7 @@ char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){
 	int Contador = 0;
 	char Retornar = -10;
 	
-	Eventos = al_create_event_queue(); 		//creamos cola de eventos
+	Eventos = al_create_event_queue();
 		if( ! Eventos ) return ERROR;
 	memset( Puerto, '\0', 7 * sizeof( char ) );
 	MenuFinJuego = al_load_bitmap( "Imagenes/MenuBack.png" );
@@ -707,16 +707,20 @@ char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){
 			return ERROR;
 		}
 	
-	al_register_event_source( Eventos, al_get_display_event_source( *(p_display) ) ); //conectamos eventos de la pantalla 
+	al_register_event_source( Eventos, al_get_display_event_source( *(p_display) ) );
 	al_register_event_source( Eventos, al_get_keyboard_event_source() );
 	
 	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
 	al_draw_bitmap( MenuFinJuego, 0, 0, 0 );
 		
 	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
-	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, "Puerto:" );	
+	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, "Puerto:" );
+	
 	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
 	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), ( 350 + ALTURA_LETRA_OPCIONES ) , ALLEGRO_ALIGN_CENTRE, Puerto );
+	
+	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", 10, 0 );
+	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), (SCREEN_H / 2) , ALLEGRO_ALIGN_CENTRE, "Mayor a 1024 ! " );
 	
 	al_flip_display();
 	
@@ -816,6 +820,9 @@ char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){
 			Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
 			al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), ( 350 + ALTURA_LETRA_OPCIONES ) , ALLEGRO_ALIGN_CENTRE, Puerto );
 			
+			Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", 10, 0 );
+			al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), (SCREEN_H / 2) , ALLEGRO_ALIGN_CENTRE, "Mayor a 1024 ! " );
+			
 			al_flip_display();
 		}
 	}
@@ -827,22 +834,43 @@ char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){
 	return Retornar;
 }
 
-int MenuEsperarJugador2( int *p_socketfd, int puerto ){
+int MenuEsperarJugador2( int *p_socketfd, int puerto ){	// Muestra una pantalla de espera
 	ALLEGRO_BITMAP *MenuBack, *Rana1, *Rana2;
 	ALLEGRO_FONT *Fuente = NULL;
+	char StringPuerto[7], Aux1[50];
+	
+	
 	
 	MenuBack = al_load_bitmap( "Imagenes/MenuBack.png" );
 	Rana1 = al_load_bitmap( "Imagenes/RanaArriba.png" );
 	Rana2 = al_load_bitmap( "Imagenes/Rana2Arriba.png" );
 	
+	memset( Aux1, '\0', 50 * sizeof( char ) );
+	memset( StringPuerto, '\0', 7 * sizeof( char ) );
+	
+	sprintf( StringPuerto, "%d", puerto );	
+	strcpy( Aux1, "Puerto ingresado: " );
+	strcat( Aux1, StringPuerto );
 	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
 	al_draw_bitmap( MenuBack, 0, 0, 0 );
+	al_flip_display();
+	al_rest(0.1);
+	
 	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
 	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, "Esperando conexion Jugador 2..." );
+	al_flip_display();
+	al_rest(0.1);
+	
+	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", 20, 0 );
+	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 391, ALLEGRO_ALIGN_CENTRE, Aux1 );
+	al_flip_display();
+	al_rest(0.1);
+	
 	al_draw_bitmap( Rana1, X_INI_FROG_1, ( 2 * SCREEN_H / 3 ), 0 );
 	al_draw_bitmap( Rana2, X_INI_FROG_2, ( 2 * SCREEN_H / 3 ), 0 );
-	al_flip_display();
 	
+	al_flip_display();
+	al_rest(0.1);
 	*p_socketfd = CrearSocket( puerto );
 	
 	al_destroy_bitmap( MenuBack );
@@ -855,6 +883,8 @@ int MenuEsperarJugador2( int *p_socketfd, int puerto ){
 }
 
 char MenuPausaONLINE( ALLEGRO_DISPLAY **p_display, int socketfd, bool *key, ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_sprites_timer_2 ){
+	// Igual a MenuPausa, pero lee el socket indicado Jugador 2
+	
 	ALLEGRO_EVENT_QUEUE *Eventos_Pausa = NULL;
 	ALLEGRO_BITMAP *MenuPausa = NULL;
 	char Retornar = -10;
@@ -862,14 +892,14 @@ char MenuPausaONLINE( ALLEGRO_DISPLAY **p_display, int socketfd, bool *key, ALLE
 	
 	MenuPausa = al_load_bitmap( "Imagenes/MenuPausa1.png" );
 	
-	Eventos_Pausa = al_create_event_queue(); 		//creamos cola de eventos
+	Eventos_Pausa = al_create_event_queue();
 	if( ! Eventos_Pausa ) {
 		fprintf(stderr, "failed to create event_queue!\n");
 		Retornar = SALIR;
 	}
 	
 	if( Retornar != SALIR ){
-		al_register_event_source( Eventos_Pausa, al_get_display_event_source( *(p_display) ) ); //conectamos eventos de la pantalla 
+		al_register_event_source( Eventos_Pausa, al_get_display_event_source( *(p_display) ) );
 		al_register_event_source( Eventos_Pausa, al_get_keyboard_event_source() );
 		
 		al_draw_bitmap( MenuPausa, 0, 0, 0 );
