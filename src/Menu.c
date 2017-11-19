@@ -10,6 +10,7 @@
 #include "../inc/Inicializacion.h"
 #include "../inc/Menu.h"
 #include "../inc/Dibujos.h"
+#include "../inc/Sockets.h"
 
 char Menu( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	char Flag = ERROR;
@@ -581,7 +582,7 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 	return Retornar;
 }
 
-char GuardarOrdenadoEnArchivo( char *NewNombre, int Puntos, const char *RutaArchivo ){
+	char GuardarOrdenadoEnArchivo( char *NewNombre, int Puntos, const char *RutaArchivo ){
 	Puntaje *Ini = NULL, *Act = NULL, *Ant = NULL, *New = NULL;
 	FILE *fp;
 	char Retornar = CONTINUAR, *ActNombre, Aux[50];
@@ -677,7 +678,7 @@ char GuardarOrdenadoEnArchivo( char *NewNombre, int Puntos, const char *RutaArch
 	return Retornar;
 }
 
-void LiberarMemoriaDePuntos( Puntaje *Ini ){
+	void LiberarMemoriaDePuntos( Puntaje *Ini ){
 	Puntaje *Act, *Ant = NULL;
 	
 	Act = Ini;
@@ -687,5 +688,218 @@ void LiberarMemoriaDePuntos( Puntaje *Ini ){
 		Ant = Act;
 		Act = Act->Sig;
 	}
+}
+
+char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){
+	ALLEGRO_EVENT_QUEUE *Eventos;
+	ALLEGRO_FONT *Fuente = NULL;
+	ALLEGRO_BITMAP *MenuFinJuego = NULL;
+	char Puerto[7];
+	int Contador = 0;
+	char Retornar = -10;
+	
+	Eventos = al_create_event_queue(); 		//creamos cola de eventos
+		if( ! Eventos ) return ERROR;
+	memset( Puerto, '\0', 7 * sizeof( char ) );
+	MenuFinJuego = al_load_bitmap( "Imagenes/MenuBack.png" );
+		if( ! MenuFinJuego ) {
+			al_destroy_event_queue( Eventos );
+			return ERROR;
+		}
+	
+	al_register_event_source( Eventos, al_get_display_event_source( *(p_display) ) ); //conectamos eventos de la pantalla 
+	al_register_event_source( Eventos, al_get_keyboard_event_source() );
+	
+	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
+	al_draw_bitmap( MenuFinJuego, 0, 0, 0 );
+		
+	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
+	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, "IP Jugador 2:" );
+	
+	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
+	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), ( 350 + ALTURA_LETRA_OPCIONES ) , ALLEGRO_ALIGN_CENTRE, Puerto );
+	
+	al_flip_display();
+	
+	while( Retornar != CONTINUAR && Retornar != SALIR && strlen( Puerto ) <= 6 ){
+		ALLEGRO_EVENT ev;
+		al_wait_for_event( Eventos, &ev );
+		
+		if( ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE ){
+			Retornar = SALIR;
+			break;
+		}
+		
+		else if ( ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE ){
+			Retornar = SALIR;
+			break;
+		}
+		
+		else if( ev.type == ALLEGRO_EVENT_KEY_DOWN ){
+			switch ( ev.keyboard.keycode ){
+				case ALLEGRO_KEY_PAD_0:
+				case ALLEGRO_KEY_0:
+					Puerto[Contador] = '0';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_1:
+				case ALLEGRO_KEY_1:
+					Puerto[Contador] = '1';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_2:
+				case ALLEGRO_KEY_2:
+					Puerto[Contador] = '2';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_3:
+				case ALLEGRO_KEY_3:
+					Puerto[Contador] = '3';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_4:
+				case ALLEGRO_KEY_4:
+					Puerto[Contador] = '4';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_5:
+				case ALLEGRO_KEY_5:
+					Puerto[Contador] = '5';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_6:
+				case ALLEGRO_KEY_6:
+					Puerto[Contador] = '6';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_7:
+				case ALLEGRO_KEY_7:
+					Puerto[Contador] = '7';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_8:
+				case ALLEGRO_KEY_8:
+					Puerto[Contador] = '8';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_PAD_9:
+				case ALLEGRO_KEY_9:
+					Puerto[Contador] = '9';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_SPACE:
+					Puerto[Contador] = ' ';
+					Contador ++;
+					break;
+				case ALLEGRO_KEY_ENTER:
+					Retornar = CONTINUAR;
+					break;
+				case ALLEGRO_KEY_BACKSPACE:
+					if( Contador >= 2 ){
+						Contador --;
+						Puerto[Contador] = '\0';
+					}
+					else{
+						Contador = 0;
+						Puerto[Contador] = '\0';
+					}
+					break;
+			}
+		}
+		
+		if( Retornar != CONTINUAR && Retornar != SALIR ){
+			al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
+			al_draw_bitmap( MenuFinJuego, 0, 0, 0 );
+			
+			Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
+			al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, "IP Jugador 2:" );
+			
+			Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ( ALTURA_LETRA_OPCIONES / 2 ) , 0 );
+			al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), ( 350 + ALTURA_LETRA_OPCIONES ) , ALLEGRO_ALIGN_CENTRE, Puerto );
+			
+			al_flip_display();
+		}
+	}
+	(*NPuerto) = atoi( Puerto );
+	
+	al_destroy_event_queue( Eventos );
+	al_destroy_bitmap( MenuFinJuego );
+	al_destroy_font( Fuente );
+	return Retornar;
+}
+
+int MenuEsperarJugador2( int *p_socketfd, int puerto ){
+	ALLEGRO_BITMAP *MenuBack, *Rana1, *Rana2;
+	ALLEGRO_FONT *Fuente = NULL;
+	
+	MenuBack = al_load_bitmap( "Imagenes/MenuBack.png" );
+	Rana1 = al_load_bitmap( "Imagenes/RanaArriba.png" );
+	Rana2 = al_load_bitmap( "Imagenes/Rana2Arriba.png" );
+	
+	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
+	al_draw_bitmap( MenuBack, 0, 0, 0 );
+	Fuente = al_load_ttf_font( "Fuente/KeeponTruckin.ttf", ALTURA_LETRA_OPCIONES, 0 );
+	al_draw_text( Fuente, al_map_rgb( 0, 205, 50 ), ( SCREEN_W / 2 ), 295, ALLEGRO_ALIGN_CENTRE, "Esperando conexion Jugador 2..." );
+	al_draw_bitmap( Rana1, X_INI_FROG_1, ( 2 * SCREEN_H / 3 ), 0 );
+	al_draw_bitmap( Rana2, X_INI_FROG_2, ( 2 * SCREEN_H / 3 ), 0 );
+	al_flip_display();
+	
+	*p_socketfd = CrearSocket( puerto );
+	
+	al_destroy_bitmap( MenuBack );
+	al_destroy_bitmap( Rana1 );
+	al_destroy_bitmap( Rana2 );
+	al_destroy_font( Fuente );
+	
+	if( *p_socketfd == ERROR ) return ERROR;
+	else return CONTINUAR;
+}
+
+char MenuPausaONLINE( ALLEGRO_DISPLAY **p_display, int socketfd, bool *key, ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_sprites_timer_2 ){
+	ALLEGRO_EVENT_QUEUE *Eventos_Pausa = NULL;
+	ALLEGRO_BITMAP *MenuPausa = NULL;
+	char Retornar = -10;
+	int Aux;
+	
+	MenuPausa = al_load_bitmap( "Imagenes/MenuPausa1.png" );
+	
+	Eventos_Pausa = al_create_event_queue(); 		//creamos cola de eventos
+	if( ! Eventos_Pausa ) {
+		fprintf(stderr, "failed to create event_queue!\n");
+		Retornar = SALIR;
+	}
+	
+	if( Retornar != SALIR ){
+		al_register_event_source( Eventos_Pausa, al_get_display_event_source( *(p_display) ) ); //conectamos eventos de la pantalla 
+		al_register_event_source( Eventos_Pausa, al_get_keyboard_event_source() );
+		
+		al_draw_bitmap( MenuPausa, 0, 0, 0 );
+		al_flip_display();		
+				
+		while( Retornar == -10 ){
+			ALLEGRO_EVENT Ev;
+			al_wait_for_event_timed( Eventos_Pausa, &Ev, 0.02 );
+			
+			if( ( Aux = LeerDelSocket( socketfd, key, p_resting_timer_2, p_sprites_timer_2 ) ) > 0 ){
+				if( Aux == 100 ){
+					Retornar = CONTINUAR;
+					break;
+				}
+			}
+			
+			if( Ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE ){
+				Retornar = SALIR;
+			}
+			
+			else if(Ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+				if( Ev.keyboard.keycode == ALLEGRO_KEY_X ) Retornar = SALIR;																							//SALIR del juego
+				else if( Ev.keyboard.keycode == ALLEGRO_KEY_ENTER || Ev.keyboard.keycode == ALLEGRO_KEY_P ) Retornar = CONTINUAR;										//CONTINUAR con el juego		
+				else if( Ev.keyboard.keycode == ALLEGRO_KEY_S || Ev.keyboard.keycode == ALLEGRO_KEY_Q || Ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE ) Retornar = VOLVER;	//VOLVER al menu principal
+			}
+		}
+	}
+	al_destroy_event_queue( Eventos_Pausa );
+	al_destroy_bitmap( MenuPausa );	
+	return Retornar;
 }
 

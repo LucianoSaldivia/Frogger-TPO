@@ -9,13 +9,14 @@ enum MYKEYS {
    KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_EXIT
 };
 
-typedef struct Teclas_2
-{
-    bool T_arriba,T_abajo, T_izquierda, T_derecha;
+typedef struct Teclas_2{
+	bool T_arriba,T_abajo, T_izquierda, T_derecha, T_pausa;
 } Teclas_2;
 
-void error(const char *msg)
-{
+void error(const char *msg){
     perror(msg);
     exit(0);
 }
+
+#define PAUSA_AUX 4
+

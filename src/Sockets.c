@@ -21,20 +21,19 @@
 
 
 
-int CrearSocket(int puerto){
+int CrearSocket( int puerto ){
 
 	const int uno=1;
-    struct sockaddr_in serverAddress;
-    int sockfd;
-    int clientfd;
-    struct sockaddr_in clientAddress;
-    socklen_t clientAddressLen;
+	struct sockaddr_in serverAddress;
+	int sockfd;
+	int clientfd;
+	struct sockaddr_in clientAddress;
+	socklen_t clientAddressLen;
 
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if(sockfd==-1) return ERROR;
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+		if(sockfd==-1) return ERROR;
 
-	if(setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*)&uno, 
-		(socklen_t)(sizeof(uno)))) return ERROR;
+	if( setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (void*)&uno, (socklen_t)( sizeof(uno) )) ) return ERROR;
 
 	// cargamos parametros del socket
     serverAddress.sin_family = AF_INET;
@@ -50,10 +49,9 @@ int CrearSocket(int puerto){
     clientfd = accept(sockfd, (struct sockaddr *)&clientAddress, &clientAddressLen);
     if(clientfd < 0) return ERROR;
     return clientfd;
-
 }
 
-void dumpteclas(Teclas_2 tmp) {
+void dumpteclas( Teclas_2 tmp ) {
     if(tmp.T_arriba) {
         fprintf(stderr, "T_arriba = true\n");
     }else {
@@ -75,15 +73,42 @@ void dumpteclas(Teclas_2 tmp) {
         fprintf(stderr, "T_derecha = false\n");
     }
 }
-void LeerDelSocket(int sockfd, bool *key, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_sprites_timer ) {
-    Teclas_2 tmp = {0};
-    if( recv(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT) != 0 ){
-        dumpteclas(tmp);
-        key[KEY_2_UP] = tmp.T_arriba;
-        key[KEY_2_DOWN] = tmp.T_abajo;
-        key[KEY_2_LEFT] = tmp.T_izquierda;
-        key[KEY_2_RIGHT] = tmp.T_derecha;
-        InicializarTimers( p_resting_timer, p_sprites_timer );
-        if( ! key[KEY_2_UP] && ! key[KEY_2_DOWN] && ! key[KEY_2_LEFT] && ! key[KEY_2_RIGHT] ) al_stop_timer( *(p_resting_timer) );
-    }
+
+int LeerDelSocket( int sockfd, bool *key, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_sprites_timer ) {
+	int Salida = 0;
+	Teclas_2 tmp;
+	bool key_ant[4] = {0};
+    
+    tmp.T_arriba = false;
+	tmp.T_abajo = false;
+	tmp.T_izquierda = false;
+	tmp.T_derecha = false;
+	tmp.T_pausa = false;
+	
+	key_ant[KEY_UP] = key[KEY_2_UP];
+	key_ant[KEY_DOWN] = key[KEY_2_DOWN];
+	key_ant[KEY_LEFT] = key[KEY_2_LEFT];
+	key_ant[KEY_RIGHT] = key[KEY_2_RIGHT];
+    
+	if( (Salida = recv(sockfd, &tmp, sizeof(tmp), MSG_DONTWAIT) ) > 0 ){
+		dumpteclas(tmp);
+		key[KEY_2_UP] = tmp.T_arriba;
+		key[KEY_2_DOWN] = tmp.T_abajo;
+		key[KEY_2_LEFT] = tmp.T_izquierda;
+		key[KEY_2_RIGHT] = tmp.T_derecha;
+		
+		if( tmp.T_pausa ) return 100;
+		
+		if( key[KEY_2_UP] && ! key_ant[KEY_UP] ) InicializarTimers( p_resting_timer, p_sprites_timer );
+		if( key[KEY_2_DOWN] && ! key_ant[KEY_DOWN] ) InicializarTimers( p_resting_timer, p_sprites_timer );
+		if( key[KEY_2_LEFT] && ! key_ant[KEY_LEFT] ) InicializarTimers( p_resting_timer, p_sprites_timer );
+		if( key[KEY_2_RIGHT] && ! key_ant[KEY_RIGHT] ) InicializarTimers( p_resting_timer, p_sprites_timer );
+		
+		if( ! key[KEY_2_UP] && key_ant[KEY_UP] ) al_stop_timer( *(p_resting_timer) );
+		if( ! key[KEY_2_DOWN] && key_ant[KEY_DOWN] ) al_stop_timer( *(p_resting_timer) );
+		if( ! key[KEY_2_LEFT] && key_ant[KEY_LEFT] ) al_stop_timer( *(p_resting_timer) );
+		if( ! key[KEY_2_RIGHT] && key_ant[KEY_RIGHT] ) al_stop_timer( *(p_resting_timer) );
+	}
+	
+	return Salida;
 }

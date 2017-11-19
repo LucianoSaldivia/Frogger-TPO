@@ -114,8 +114,6 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 	if( Flag == FIN_GANO ) Flag = MenuNuevoPuntaje( &Ini, p_display, Puntos, "Ganaste !" );
 	else if( Flag == FIN_PERDIO ) Flag = MenuNuevoPuntaje( &Ini, p_display, Puntos, "Perdiste..." );
 	
-	//if( Flag != SALIR && Flag != ERROR && Flag != VOLVER ) Flag = MenuPuntajes( p_event_queue );
-	
 	al_destroy_font( FuentePuntos );
 	LiberarMemoria( &Ini );
 	Finalizar1vsC( &resting_timer, &frames_timer, &sprites_timer, &died_timer, VecFrog, &key, &PosicionesFinales );
@@ -287,7 +285,6 @@ char Juego1vs1_OFFLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_eve
 	return Flag;
 }
 
-
 char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
 	ALLEGRO_TIMER *resting_timer_1 = NULL, *resting_timer_2 = NULL, *frames_timer = NULL, *sprites_timer_1 = NULL, *sprites_timer_2 = NULL, *died_timer_1 = NULL, *died_timer_2 = NULL;
 	ALLEGRO_BITMAP **VecFrog = NULL;
@@ -295,14 +292,16 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 	Objeto *Ini = NULL, *ObjetoFrog_1 = NULL, *ObjetoFrog_2 = NULL;
 	bool *key = NULL, EstadoFrog_1 = VIVO, EstadoFrog_2 = VIVO;
 	char Flag = CONTINUAR, Direccion_1 = NO_HAY_DIRECCION, Direccion_2 = NO_HAY_DIRECCION, ContadorSprites_1 = 0, ContadorSprites_2 = 0, *PosicionesFinales = NULL, PosicionesOcupadas_1 = 0, PosicionesOcupadas_2 = 0;
-	int Vidas_1 = CANT_VIDAS_INICIALES, Vidas_2 = CANT_VIDAS_INICIALES, Puntos_1 = 0, Puntos_2 = 0;
+	int Vidas_1 = CANT_VIDAS_INICIALES, Vidas_2 = CANT_VIDAS_INICIALES, Puntos_1 = 0, Puntos_2 = 0, Aux = 0;
+	
 	int socketfd;
-	int puerto = 3000;
-	// int puerto = ingresepuerto(funciones_de_Allegro());
+	int puerto;
+	
+	Flag = MenuPedirPuerto( p_display, &puerto );
 	
 	if( Inicializar1vs1( p_event_queue, &resting_timer_1, &resting_timer_2, &frames_timer, &sprites_timer_1, &sprites_timer_2, &died_timer_1, &died_timer_2, &VecFrog, &key, &PosicionesFinales ) == ERROR ) return ERROR;
-
-	if( (socketfd = CrearSocket(puerto)) == ERROR){
+	
+	if( ( MenuEsperarJugador2( &socketfd, puerto ) ) == ERROR ){
 		Finalizar1vs1( &resting_timer_1, &resting_timer_2, &frames_timer, &sprites_timer_1, &sprites_timer_2, &died_timer_1, &died_timer_2, VecFrog, &key, &PosicionesFinales );
 		return ERROR;
 	}
@@ -319,7 +318,7 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 	while( Flag != SALIR && Flag != VOLVER ){							// VOLVER = VOLVER AL MENU PRINCIPAL
 		while( Flag != ERROR && Flag != PAUSA && Flag != FIN_PERDIO && Flag != FIN_GANO ){											//Juego
 			ALLEGRO_EVENT ev;
-			al_wait_for_event( *(p_event_queue), &ev);
+			al_wait_for_event( *(p_event_queue), &ev );
 			
 			if( ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE ){
 				Flag = SALIR;
@@ -336,14 +335,6 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 						if( key[KEY_RIGHT] && ! key[KEY_UP] && ! key[KEY_DOWN] && ! key[KEY_LEFT] ) Direccion_1 = DERECHA;
 					}
 				}
-				if( Direccion_2 == NO_HAY_DIRECCION ){
-					if( EstadoFrog_2 == VIVO ){
-						if( key[KEY_2_UP] && ! key[KEY_2_DOWN] && ! key[KEY_2_LEFT] && ! key[KEY_2_RIGHT] ) Direccion_2 = ARRIBA;
-						if( key[KEY_2_DOWN] && ! key[KEY_2_UP] && ! key[KEY_2_LEFT] && ! key[KEY_2_RIGHT] ) Direccion_2 = ABAJO;
-						if( key[KEY_2_LEFT] && ! key[KEY_2_UP] && ! key[KEY_2_DOWN] && ! key[KEY_2_RIGHT] ) Direccion_2 = IZQUIERDA;
-						if( key[KEY_2_RIGHT] && ! key[KEY_2_UP] && ! key[KEY_2_DOWN] && ! key[KEY_2_LEFT] ) Direccion_2 = DERECHA;
-					}
-				}
 			}
 			
 			else if( ev.type == ALLEGRO_EVENT_KEY_UP ){
@@ -352,8 +343,6 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 			
 			else if( ev.type == ALLEGRO_EVENT_TIMER ){
 				if( ev.timer.source == frames_timer ){
-					LeerDelSocket(socketfd, key, &resting_timer_2, &sprites_timer_2 );
-					printf( "%d %d %d %d \n", key[KEY_2_UP], key[KEY_2_DOWN], key[KEY_2_LEFT], key[KEY_2_RIGHT] );
 					if( Vidas_1 == 0 ) Flag = FIN_PERDIO;
 					else if( Vidas_2 == 0 ) Flag = FIN_GANO;
 					MoverTodo1vs1( &Ini, &ObjetoFrog_1, &ObjetoFrog_2 );
@@ -440,9 +429,22 @@ char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_even
 					}
 				}
 			}
+			
+			if( ( Aux = LeerDelSocket( socketfd, key, &resting_timer_2, &sprites_timer_2 ) ) > 0 ){
+				if( Aux == 100 ){
+					Flag = PAUSA;					
+				}
+				printf( "%d %d %d %d \n", key[KEY_2_UP], key[KEY_2_DOWN], key[KEY_2_LEFT], key[KEY_2_RIGHT] );
+				if( Direccion_2 == NO_HAY_DIRECCION && EstadoFrog_2 == VIVO){
+					if( key[KEY_2_UP] && ! key[KEY_2_DOWN] && ! key[KEY_2_LEFT] && ! key[KEY_2_RIGHT] ) Direccion_2 = ARRIBA;
+					if( key[KEY_2_DOWN] && ! key[KEY_2_UP] && ! key[KEY_2_LEFT] && ! key[KEY_2_RIGHT] ) Direccion_2 = ABAJO;
+					if( key[KEY_2_LEFT] && ! key[KEY_2_UP] && ! key[KEY_2_DOWN] && ! key[KEY_2_RIGHT] ) Direccion_2 = IZQUIERDA;
+					if( key[KEY_2_RIGHT] && ! key[KEY_2_UP] && ! key[KEY_2_DOWN] && ! key[KEY_2_LEFT] ) Direccion_2 = DERECHA;
+				}
+			}
 		}
 		if( Flag == ERROR ) break;
-		else if( Flag == PAUSA ) Flag = MenuPausa( p_display );											// Devuelve CONTINUAR, VOLVER o SALIR
+		else if( Flag == PAUSA ) Flag = MenuPausaONLINE( p_display, socketfd, key, &resting_timer_2, &sprites_timer_2 );											// Devuelve CONTINUAR, VOLVER o SALIR
 		else if( Flag == FIN_GANO || Flag == FIN_PERDIO ) break;
 		al_flush_event_queue( *(p_event_queue) );
 	}

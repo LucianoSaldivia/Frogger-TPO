@@ -24,6 +24,7 @@ enum MisPosicionesFinales{
 };
 
 #define ERROR -5
+#define PAUSA_AUX 4
 
 #define FPS 60
 #define FRAME_RATE 1.0/FPS
@@ -32,12 +33,12 @@ enum MisPosicionesFinales{
 #define FROG_SIZE 50
 #define MAX_BOUNCE_X 11.0
 #define MAX_BOUNCE_Y 13.0
-#define FROG_RESTING_TIME 0.35
+#define FROG_RESTING_TIME 1
 #define UPPER_OFFSET 62
 #define LOWER_OFFSET 20
 #define SIDE_OFFSET 9
 #define CANT_SPRITES 10
-#define TIEMPO_SALTO 0.05
+#define TIEMPO_SALTO 0.1
 #define TIEMPO_ENTRE_SPRITES (TIEMPO_SALTO/CANT_SPRITES)
 #define TIEMPO_PARA_REVIVIR 2
 
@@ -101,8 +102,7 @@ typedef struct Puntaje{
 	struct Puntaje *Sig;
 }Puntaje;
 
-typedef struct Teclas_2
-{
-	bool T_arriba,T_abajo, T_izquierda, T_derecha;
+typedef struct Teclas_2{
+	bool T_arriba,T_abajo, T_izquierda, T_derecha, T_pausa;
 } Teclas_2;
 
