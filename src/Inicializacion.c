@@ -9,9 +9,14 @@
 #include "../inc/VariablesFrogger.h"
 #include "../inc/Inicializacion.h"
 #include "../inc/Dibujos.h"
+
 /*   Genericos   */
-char InicioGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Inicializa lo necesario para todos los juegos y menus
-	
+char InicioGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn char InicioGenerico( ALLEGRO_DISPLAY **p_display,
+	 ALLEGRO_EVENT_QUEUE **p_event_queue )
+	\brief Inicializa lo necesario para todos los juegos y menus
+	*/
 	if( ! al_init() ){
 		fprintf(stderr, "failed to initialize allegro!\n");
 		return ERROR;
@@ -50,13 +55,21 @@ char InicioGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_
 	return 0;
 }
 
-void DestruirGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Finaliza y destruye todo lo inicializado por InicioGenerico
+void DestruirGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn void DestruirGenerico( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue )
+	\brief Finaliza y destruye todo lo inicializado por InicioGenerico
+	*/
 	al_destroy_display( *(p_display) );
 	al_destroy_event_queue( *(p_event_queue) );
 }
 
 
-void TerminarDeAcomodarLista( Objeto **p_Ini ){	// Ajusta las posiciones iniciales de los objetos
+void TerminarDeAcomodarLista( Objeto **p_Ini ){
+	/**
+	\fn void TerminarDeAcomodarLista( Objeto **p_Ini )
+	\brief Ajusta las posiciones iniciales de los objetos
+	*/
 	Objeto *Act;
 	
 	Act = *p_Ini;
@@ -74,7 +87,11 @@ void TerminarDeAcomodarLista( Objeto **p_Ini ){	// Ajusta las posiciones inicial
 	}
 }
 
-void LiberarMemoria( Objeto **p_Ini ){	// Elimina la lista de objetos, y todo lo que contienen sus nodos
+void LiberarMemoria( Objeto **p_Ini ){
+	/**
+	\fn void LiberarMemoria( Objeto **p_Ini ){
+	\brief Elimina la lista de objetos, y todo lo que contienen sus nodos
+	*/
 	Objeto *Act, *Ant;
 	
 	Act = *(p_Ini);
@@ -88,7 +105,11 @@ void LiberarMemoria( Objeto **p_Ini ){	// Elimina la lista de objetos, y todo lo
 	}
 }
 
-void InicializarTimers( ALLEGRO_TIMER **p_timer1, ALLEGRO_TIMER **p_timer2 ){	// Inicializa 2 timers
+void InicializarTimers( ALLEGRO_TIMER **p_timer1, ALLEGRO_TIMER **p_timer2 ){
+	/**
+	\fn void InicializarTimers( ALLEGRO_TIMER **p_timer1, ALLEGRO_TIMER **p_timer2 )
+	\brief Inicializa 2 timers
+	*/
 	al_start_timer(*p_timer1);		
 	al_start_timer(*p_timer2);	
 }
@@ -96,7 +117,14 @@ void InicializarTimers( ALLEGRO_TIMER **p_timer1, ALLEGRO_TIMER **p_timer2 ){	//
 /*   1vsC   */
 
 char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer, ALLEGRO_TIMER **p_died_timer, ALLEGRO_BITMAP ***p_VecFrog, bool **p_key, char **p_PosicionesFinales ){	
-	// Inicializa lo necesario para 1vsC
+	/**
+	\fn char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue,
+	 ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_timer,
+	 ALLEGRO_TIMER **p_sprites_timer, ALLEGRO_TIMER **p_died_timer,
+	 ALLEGRO_BITMAP ***p_VecFrog, bool **p_key,
+	 char **p_PosicionesFinales )
+	\brief Inicializa lo necesario para 1vsC
+	*/
 	
 	*(p_resting_timer) = al_create_timer(FROG_RESTING_TIME);
 	if( ! (*p_resting_timer) ) {
@@ -173,7 +201,11 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	return CONTINUAR;
 }
 
-	void CargarSprites1vsC( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora ){	// Carga las imagenes de todas las posiciones la rana
+	void CargarSprites1vsC( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora ){
+	/**
+	\fn void CargarSprites1vsC( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora )
+	\brief Carga las imagenes de todas las posiciones la rana
+	*/
 	char RutaFinal[100];
 	ALLEGRO_BITMAP **VecFrog = *(p_VecFrog);
 	RutaFinal[0] = '\0';
@@ -207,7 +239,11 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	VecFrog[8] = al_load_bitmap(RutaFinal);
 }	
 
-	void CargarKey1vsC( bool **p_key ){	// Inicializa los flags de las teclas
+	void CargarKey1vsC( bool **p_key ){
+	/**
+	\fn void CargarKey1vsC( bool **p_key )
+	\brief Inicializa los flags de las teclas
+	*/
 	bool *key = *(p_key);
 	
 	key[KEY_UP] = false;
@@ -216,7 +252,11 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	key[KEY_RIGHT] = false;	
 }
 
-	void CargarPosicionesFinales1vsC( char **p_PosicionesFinales ){	// Inicializamos flags para las Posiciones Finales 
+	void CargarPosicionesFinales1vsC( char **p_PosicionesFinales ){
+	/**
+	\fn void CargarPosicionesFinales1vsC( char **p_PosicionesFinales )
+	\brief Inicializamos flags para las Posiciones Finales
+	*/
 	char *PosicionesFinales;
 	PosicionesFinales = *(p_PosicionesFinales);
 	
@@ -228,8 +268,13 @@ char Inicializar1vsC( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 }
 
 void Finalizar1vsC( ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer, ALLEGRO_TIMER **p_died_timer, ALLEGRO_BITMAP **VecFrog, bool **p_key, char **p_PosicionesFinales ){
-	// Finaliza y destruye todo lo inicializado por Inicializar1vsC
-	
+	/**
+	\fn void Finalizar1vsC( ALLEGRO_TIMER **p_resting_timer,
+	 ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer,
+	 ALLEGRO_TIMER **p_died_timer, ALLEGRO_BITMAP **VecFrog,
+	 bool **p_key, char **p_PosicionesFinales )
+	\brief Finaliza y destruye todo lo inicializado por Inicializar1vsC
+	*/
 	int Contador;
 	al_destroy_timer( *(p_resting_timer) );
 	al_destroy_timer( *(p_frames_timer) );
@@ -243,7 +288,11 @@ void Finalizar1vsC( ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_frames_ti
 	free( *(p_PosicionesFinales) );
 }
 
-char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *RutaArchivo ){	// Leemos archivo de Objetos para 1vsC y armamos la lista de objetos
+char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *RutaArchivo ){
+	/**
+	\fn char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *RutaArchivo )
+	\brief Leemos archivo de Objetos para 1vsC y armamos la lista de objetos
+	*/
 	FILE *fp;
 	Objeto *New;
 	char *Nombre, *Numero, *RutaImagen, *DirMov, *Velocidad, *Alto, *Ancho, *Dif_x;
@@ -394,8 +443,12 @@ char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *Rut
 }
 
 	char CargarDatosEnObjeto1vsC( Objeto *New, char *Nombre, char *Numero, char *RutaImagen, char *DirMov, char *Velocidad, char *Alto, char *Ancho, char *Dif_x ){
-	// Carga los datos de cada objeto en su correspondiente nodo de la lista de 1vsC
-	
+	/**
+	\fn char CargarDatosEnObjeto1vsC( Objeto *New,
+	 char *Nombre, char *Numero, char *RutaImagen,
+	 char *DirMov, char *Velocidad, char *Alto, char *Ancho, char *Dif_x )
+	\brief Carga los datos de cada objeto en su correspondiente nodo de la lista de 1vsC
+	*/
 	New->Nombre = (char *) malloc( 10 * sizeof(char) );
 		if( New->Nombre == NULL ) return ERROR;
 	New->DirImagen = (char *) malloc( 75 * sizeof(char) );
@@ -458,8 +511,15 @@ char AlistarObjetos1vsC( Objeto **p_Ini,  Objeto **p_ObjetoFrog, const char *Rut
 /*   1vs1   */
 
 char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer_1, ALLEGRO_TIMER **p_sprites_timer_2, ALLEGRO_TIMER **p_died_timer_1, ALLEGRO_TIMER **p_died_timer_2, ALLEGRO_BITMAP ***p_VecFrog, bool **p_key, char **p_PosicionesFinales ){	
-	// Inicializa lo necesario para 1vs1 ONLINE y OFFLINE
-	
+	/**
+	\fn char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue,
+	 ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting_timer_2,
+	 ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer_1,
+	 ALLEGRO_TIMER **p_sprites_timer_2, ALLEGRO_TIMER **p_died_timer_1,
+	 ALLEGRO_TIMER **p_died_timer_2, ALLEGRO_BITMAP ***p_VecFrog,
+	 bool **p_key, char **p_PosicionesFinales )
+	\brief Inicializa lo necesario para 1vs1 ONLINE y OFFLINE
+	*/
 	*(p_resting_timer_1) = al_create_timer(FROG_RESTING_TIME);
 		if( ! (*p_resting_timer_1) ) {
 			fprintf(stderr, "failed to create timer!\n");
@@ -579,7 +639,12 @@ char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	return CONTINUAR;
 }
 
-	void CargarSprites1vs1( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora ){	// Carga las imagenes de todas las posiciones las 2 ranas
+	void CargarSprites1vs1( ALLEGRO_BITMAP ***p_VecFrog, const char *CarpetaContenedora ){
+	/**
+	\fn void CargarSprites1vs1( ALLEGRO_BITMAP ***p_VecFrog,
+	 const char *CarpetaContenedora )
+	\brief Carga las imagenes de todas las posiciones las 2 ranas
+	*/
 	char RutaFinal[100];
 	ALLEGRO_BITMAP **VecFrog = *(p_VecFrog);
 	RutaFinal[0] = '\0';
@@ -637,7 +702,11 @@ char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 	VecFrog[16] = al_load_bitmap(RutaFinal);
 }	
 
-	void CargarKey1vs1( bool **p_key ){	// Inicializa los flags de las teclas
+	void CargarKey1vs1( bool **p_key ){
+	/**
+	\fn void CargarKey1vs1( bool **p_key )
+	\brief Inicializa los flags de las teclas
+	*/
 	bool *key = *(p_key);
 	
 	key[KEY_UP] = false;
@@ -651,6 +720,10 @@ char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 }
 
 	void CargarPosicionesFinales1vs1( char **p_PosicionesFinales ){
+	/**
+	\fn	void CargarPosicionesFinales1vs1( char **p_PosicionesFinales ){
+	\brief Inicializa los flags de posiciones finales
+	*/
 	char *PosicionesFinales;
 	PosicionesFinales = *(p_PosicionesFinales);
 	
@@ -662,8 +735,14 @@ char Inicializar1vs1( ALLEGRO_EVENT_QUEUE **p_event_queue, ALLEGRO_TIMER **p_res
 }
 
 void Finalizar1vs1( ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_frames_timer, ALLEGRO_TIMER **p_sprites_timer_1, ALLEGRO_TIMER **p_sprites_timer_2, ALLEGRO_TIMER **p_died_timer_1, ALLEGRO_TIMER **p_died_timer_2, ALLEGRO_BITMAP **VecFrog, bool **p_key, char **p_PosicionesFinales ){
-	// Finaliza y destruye todo lo inicializado por Inicializar1vs1
-	
+	/**
+	\fn	void Finalizar1vs1( ALLEGRO_TIMER **p_resting_timer_1,
+	 ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_frames_timer,
+	 ALLEGRO_TIMER **p_sprites_timer_1, ALLEGRO_TIMER **p_sprites_timer_2,
+	 ALLEGRO_TIMER **p_died_timer_1, ALLEGRO_TIMER **p_died_timer_2,
+	 ALLEGRO_BITMAP **VecFrog, bool **p_key, char **p_PosicionesFinales )
+	\brief Finaliza y destruye todo lo inicializado por Inicializar1vs1
+	*/
 	int Contador;
 	al_destroy_timer( *(p_resting_timer_1) );
 	al_destroy_timer( *(p_resting_timer_2) );
@@ -680,7 +759,12 @@ void Finalizar1vs1( ALLEGRO_TIMER **p_resting_timer_1, ALLEGRO_TIMER **p_resting
 	free( *(p_PosicionesFinales) );
 }
 
-char AlistarObjetos1vs1( Objeto **p_Ini,  Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, const char *RutaArchivo ){ // Leemos archivo de Objetos para 1vs1 y armamos la lista de objetos
+char AlistarObjetos1vs1( Objeto **p_Ini, Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, const char *RutaArchivo ){
+	/**
+	\fn	char AlistarObjetos1vs1( Objeto **p_Ini,
+	 Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, const char *RutaArchivo ) 
+	\brief Leemos archivo de Objetos para 1vs1 y armamos la lista de objetos
+	*/
 	FILE *fp;
 	Objeto *New;
 	char *Nombre, *Numero, *RutaImagen, *DirMov, *Velocidad, *Alto, *Ancho, *Dif_x;
@@ -844,8 +928,13 @@ char AlistarObjetos1vs1( Objeto **p_Ini,  Objeto **p_ObjetoFrog_1, Objeto **p_Ob
 }
 
 	char CargarDatosEnObjeto1vs1( Objeto *New, char *Nombre, char *Numero, char *RutaImagen, char *DirMov, char *Velocidad, char *Alto, char *Ancho, char *Dif_x ){
-	// Carga los datos de cada objeto en su correspondiente nodo de la lista de 1vs1
-	
+	/**
+	\fn	char CargarDatosEnObjeto1vs1( Objeto *New,
+	 char *Nombre, char *Numero, char *RutaImagen,
+	 char *DirMov, char *Velocidad, char *Alto,
+	 char *Ancho, char *Dif_x )
+	\brief Carga los datos de cada objeto en su correspondiente nodo de la lista de 1vs1
+	*/
 	New->Nombre = (char *) malloc( 10 * sizeof(char) );
 		if( New->Nombre == NULL ) return ERROR;
 	New->DirImagen = (char *) malloc( 75 * sizeof(char) );

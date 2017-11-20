@@ -14,7 +14,12 @@
 #include "../inc/Menu.h"
 #include "../inc/Sockets.h"
 
-char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Juego 1vsC
+char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn char Juego1vsC( ALLEGRO_DISPLAY **p_display,
+	 ALLEGRO_EVENT_QUEUE **p_event_queue )
+	\brief Juego 1vsC
+	*/
 	ALLEGRO_TIMER *resting_timer = NULL, *frames_timer = NULL, *sprites_timer = NULL, *died_timer = NULL;
 	ALLEGRO_BITMAP **VecFrog = NULL;
 	ALLEGRO_FONT *FuentePuntos = NULL;
@@ -121,7 +126,12 @@ char Juego1vsC( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue
 	return Flag;
 }
 
-char Juego1vs1_OFFLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Juego 1vsC
+char Juego1vs1_OFFLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn char Juego1vs1_OFFLINE( ALLEGRO_DISPLAY **p_display,
+	 ALLEGRO_EVENT_QUEUE **p_event_queue )
+	\brief Juego 1vs1 OFFLINE
+	*/
 	ALLEGRO_TIMER *resting_timer_1 = NULL, *resting_timer_2 = NULL, *frames_timer = NULL, *sprites_timer_1 = NULL, *sprites_timer_2 = NULL, *died_timer_1 = NULL, *died_timer_2 = NULL;
 	ALLEGRO_BITMAP **VecFrog = NULL;
 	ALLEGRO_FONT *FuentePuntos = NULL;
@@ -285,7 +295,12 @@ char Juego1vs1_OFFLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_eve
 	return Flag;
 }
 
-char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Juego 1vsC
+char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn char Juego1vs1_ONLINE( ALLEGRO_DISPLAY **p_display,
+	 ALLEGRO_EVENT_QUEUE **p_event_queue )
+	\brief Juego 1vs1 ONLINE
+	*/
 	ALLEGRO_TIMER *resting_timer_1 = NULL, *resting_timer_2 = NULL, *frames_timer = NULL, *sprites_timer_1 = NULL, *sprites_timer_2 = NULL, *died_timer_1 = NULL, *died_timer_2 = NULL;
 	ALLEGRO_BITMAP **VecFrog = NULL;
 	ALLEGRO_FONT *FuentePuntos = NULL;

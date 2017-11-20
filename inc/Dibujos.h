@@ -12,8 +12,8 @@ void MoverTodo1vs1( Objeto **p_Ini, Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFr
 
 
 void RedibujarDesde( Objeto **p_DesdeAca );
-void RedibujarDesdeConTexto1vsC( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos ,int *p_Vidas );
-void RedibujarDesdeConTexto1vs1( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos_1 ,int *p_Vidas_1, int *p_Puntos_2 ,int *p_Vidas_2 );
+void RedibujarDesdeConTexto1vsC( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos, int *p_Vidas );
+void RedibujarDesdeConTexto1vs1( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos_1, int *p_Vidas_1, int *p_Puntos_2 ,int *p_Vidas_2 );
 
 void DetectarColision( Objeto **p_Ini, Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER **p_died_timer, int *Vidas, bool *EstadoFrog, char ContadorSprites );
 

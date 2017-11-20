@@ -19,8 +19,11 @@
 #include "../inc/Menu.h"
 #include "../inc/Sockets.h"
 
-int CrearSocket( int puerto ){	// Creamos el socket
-
+int CrearSocket( int puerto ){
+	/**
+	\fn int CrearSocket( int puerto )
+	\brief Creamos el socket
+	*/
 	const int uno=1;
 	struct sockaddr_in serverAddress;
 	int sockfd;
@@ -49,7 +52,11 @@ int CrearSocket( int puerto ){	// Creamos el socket
     return clientfd;
 }
 
-void dumpteclas( Teclas_2 NodoTeclas ) {	// Funcion para probar la llegada de las teclas
+void dumpteclas( Teclas_2 NodoTeclas ) {
+    /**
+	\fn void dumpteclas( Teclas_2 NodoTeclas )
+	\brief Funcion para probar la llegada de las teclas
+	*/
     if(NodoTeclas.T_arriba) {
         fprintf(stderr, "T_arriba = true\n");
     }else {
@@ -73,6 +80,11 @@ void dumpteclas( Teclas_2 NodoTeclas ) {	// Funcion para probar la llegada de la
 }
 
 int LeerDelSocket( int sockfd, bool *key, ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_sprites_timer ) {
+	/**
+	\fn int LeerDelSocket( int sockfd, bool *key,
+	 ALLEGRO_TIMER **p_resting_timer, ALLEGRO_TIMER **p_sprites_timer )
+	\brief Lectura NO BLOQUEANTE de lo que haya en el socket
+	*/
 	int Salida = 0;
 	Teclas_2 NodoTeclas;
 	bool key_ant[4] = {0};

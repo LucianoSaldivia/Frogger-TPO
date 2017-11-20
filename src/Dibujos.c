@@ -11,8 +11,13 @@
 #include "../inc/Dibujos.h"
 
 void DibujarParaMenu( ALLEGRO_BITMAP **MenuBack, ALLEGRO_BITMAP **Frog, ALLEGRO_FONT **FuenteTitulo, ALLEGRO_FONT **FuenteOpciones, ALLEGRO_FONT **FuenteAclaraciones, const char *TipoDeMenu, int Pos_x, int Pos_y ){
-	// Dibujamos lo necesario para el menu especificado
-	
+	/**
+	\fn void DibujarParaMenu( ALLEGRO_BITMAP **MenuBack,
+	 ALLEGRO_BITMAP **Frog, ALLEGRO_FONT **FuenteTitulo,
+	 ALLEGRO_FONT **FuenteOpciones, ALLEGRO_FONT **FuenteAclaraciones,
+	 const char *TipoDeMenu, int Pos_x, int Pos_y )
+	\brief Dibujamos lo necesario para el menu especificado
+	*/ 
 	char *ActNombre, *ActPuntaje, *NombreAMostrar;
 	FILE* fp;
 	int Contador = 1;
@@ -87,7 +92,11 @@ void DibujarParaMenu( ALLEGRO_BITMAP **MenuBack, ALLEGRO_BITMAP **Frog, ALLEGRO_
 }
 
 
-void MoverTodo( Objeto **p_Ini, Objeto **p_ObjetoFrog ){	// Mueve todos los objetos que deben moverse
+void MoverTodo( Objeto **p_Ini, Objeto **p_ObjetoFrog ){
+	/**
+	\fn void MoverTodo( Objeto **p_Ini, Objeto **p_ObjetoFrog )
+	\brief Mueve todos los objetos que deben moverse
+	*/ 
 	Objeto *Act, *Aux, *ObjetoFrog;
 	int i;
 		
@@ -133,7 +142,11 @@ void MoverTodo( Objeto **p_Ini, Objeto **p_ObjetoFrog ){	// Mueve todos los obje
 	}	
 }
 
-void MoverTodo1vs1( Objeto **p_Ini, Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2 ){	// Mueve todos los objetos que deben moverse para 1sv1
+void MoverTodo1vs1( Objeto **p_Ini, Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2 ){
+	/**
+	\fn void MoverTodo1vs1( Objeto **p_Ini, Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2 )
+	\brief Mueve todos los objetos que deben moverse para 1sv1
+	*/ 
 	Objeto *Act, *Aux, *ObjetoFrog_1, *ObjetoFrog_2;
 	int i;
 		
@@ -184,7 +197,11 @@ void MoverTodo1vs1( Objeto **p_Ini, Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFr
 	}	
 }
 
-void RedibujarDesde( Objeto **p_DesdeAca ){	// Redibujamos la lista empezando por el objeto indicado
+void RedibujarDesde( Objeto **p_DesdeAca ){ 
+	/**
+	\fn void RedibujarDesde( Objeto **p_DesdeAca )
+	\brief Redibujamos la lista empezando por el objeto indicado
+	*/ 
 	Objeto *Act;
 	
 	al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
@@ -196,9 +213,11 @@ void RedibujarDesde( Objeto **p_DesdeAca ){	// Redibujamos la lista empezando po
 	}
 }
 
-void RedibujarDesdeConTexto1vsC( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos ,int *p_Vidas ){
-	// Redibujamos la lista empezando por el objeto indicado, y mostramos datos de 1vsC
-	
+void RedibujarDesdeConTexto1vsC( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos, int *p_Vidas ){
+	/**
+	\fn void RedibujarDesde( Objeto **p_DesdeAca )
+	\brief Redibujamos la lista empezando por el objeto indicado, y mostramos datos de 1vsC
+	*/
 	char Aux1[1000], Aux2[1000];
 	Objeto *Act;
 	
@@ -221,9 +240,13 @@ void RedibujarDesdeConTexto1vsC( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePunto
 	al_flip_display();
 }
 
-void RedibujarDesdeConTexto1vs1( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos_1 ,int *p_Vidas_1, int *p_Puntos_2 ,int *p_Vidas_2 ){
-	// Redibujamos la lista empezando por el objeto indicado, y mostramos datos de 1vs1
-	
+void RedibujarDesdeConTexto1vs1( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePuntos, int *p_Puntos_1, int *p_Vidas_1, int *p_Puntos_2 ,int *p_Vidas_2 ){
+	/**
+	\fn void RedibujarDesdeConTexto1vs1( Objeto **p_DesdeAca,
+	 ALLEGRO_FONT **FuentePuntos, int *p_Puntos_1, int *p_Vidas_1,
+	 int *p_Puntos_2 ,int *p_Vidas_2 )
+	\brief 	Redibujamos la lista empezando por el objeto indicado, y mostramos datos de 1vs1
+	*/
 	int AlturaFuente = al_get_font_line_height( *(FuentePuntos) );
 	char Aux1[1000], Aux2[1000];
 	Objeto *Act;
@@ -264,8 +287,12 @@ void RedibujarDesdeConTexto1vs1( Objeto **p_DesdeAca, ALLEGRO_FONT **FuentePunto
 }
 
 void DetectarColision( Objeto **p_Ini, Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER **p_died_timer, int *Vidas, bool *EstadoFrog, char ContadorSprites ){
-	// Detectamos choques con autos, y caidas al agua
-	
+	/**
+	\fn void DetectarColision( Objeto **p_Ini, Objeto **p_ObjetoFrog,
+	 ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER **p_died_timer,
+	 int *Vidas, bool *EstadoFrog, char ContadorSprites ){
+	\brief	Detectamos choques con autos, y caidas al agua
+	*/
 	Objeto *Ini, *ObjetoFrog, *Act, *Aux = NULL;
 	Ini = (*p_Ini)->Sig;
 	ObjetoFrog = *p_ObjetoFrog;
@@ -312,7 +339,12 @@ void DetectarColision( Objeto **p_Ini, Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **V
 
 
 void FrogSeMurio( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER **died_timer, int *Vidas, bool *EstadoFrog ){
-	// Mata la rana, le saca una vida, muestra su imagen muerta y le da un tiempo hasta revivir
+	/**
+	\fn void FrogSeMurio( Objeto **p_ObjetoFrog,
+	 ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER **died_timer,
+	 int *Vidas, bool *EstadoFrog )
+	\brief Mata la rana, le saca una vida, muestra su imagen muerta y le da un tiempo hasta revivir
+	*/ 
 	al_start_timer( *( died_timer ) );
 	( *(p_ObjetoFrog) )->Imagen =  VecFrog[8];
 	( *(p_ObjetoFrog) )->Velocidad = 0;
@@ -321,8 +353,12 @@ void FrogSeMurio( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER
 }
 
 void RevivirFrog1( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER **died_timer, bool *EstadoFrog ){
-	// Nos da una rana nueva
-	
+	/**
+	\fn void RevivirFrog1( Objeto **p_ObjetoFrog,
+	 ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIMER **died_timer,
+	 bool *EstadoFrog )
+	\brief Nos da una rana nueva
+	*/ 
 	al_stop_timer( *( died_timer ) );
 	( *(p_ObjetoFrog) )->Imagen = VecFrog[0];
 	( *(EstadoFrog) ) = VIVO;
@@ -334,7 +370,12 @@ void RevivirFrog1( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, ALLEGRO_TIME
 }
 
 
-char LeerPosFinal( Objeto **p_ObjetoFrog, char *PosicionesFinales ){	// Busca posiciones finales ocupadas para 1vsC
+char LeerPosFinal( Objeto **p_ObjetoFrog, char *PosicionesFinales ){ 
+	/**
+	\fn char LeerPosFinal( Objeto **p_ObjetoFrog,
+	 char *PosicionesFinales )
+	\brief Busca posiciones finales ocupadas para 1vsC
+	*/ 
 	Objeto *NewFrog = NULL;
 	bool FlagCambio = false;
 	
@@ -375,7 +416,13 @@ char LeerPosFinal( Objeto **p_ObjetoFrog, char *PosicionesFinales ){	// Busca po
 	return CONTINUAR;
  }
 
-char LeerPosFinal1vs1( Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, char *PosicionesFinales, char *PosicionesOcupadas_1, char *PosicionesOcupadas_2 ){	// Busca posiciones finales ocupadas para 1vs1
+char LeerPosFinal1vs1( Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, char *PosicionesFinales, char *PosicionesOcupadas_1, char *PosicionesOcupadas_2 ){
+	/**
+	\fn char LeerPosFinal1vs1( Objeto **p_ObjetoFrog_1,
+	 Objeto **p_ObjetoFrog_2, char *PosicionesFinales,
+	 char *PosicionesOcupadas_1, char *PosicionesOcupadas_2 )
+	\brief Busca posiciones finales ocupadas para 1vs1
+	*/
 	Objeto *NewFrog = NULL, *ObjetoFrog_1, *ObjetoFrog_2;
 	bool FlagCambio = false;
 	
@@ -464,7 +511,11 @@ char LeerPosFinal1vs1( Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, char *P
 	return CONTINUAR;
 }
 
-	char DameUnNuevoFrog( Objeto **p_ObjetoFrog, Objeto **p_NewFrog ){	// Pedimos un nuevo frog, ya que el anterior quedo en la posicion final
+	char DameUnNuevoFrog( Objeto **p_ObjetoFrog, Objeto **p_NewFrog ){
+	/**
+	\fn char DameUnNuevoFrog( Objeto **p_ObjetoFrog, Objeto **p_NewFrog )
+	\brief Pedimos un nuevo frog, ya que el anterior quedo en la posicion final
+	*/
 	Objeto *NewFrog = *(p_NewFrog);
 	
 	NewFrog->Nombre = (char *) malloc( 10 * sizeof(char) );
@@ -493,7 +544,11 @@ char LeerPosFinal1vs1( Objeto **p_ObjetoFrog_1, Objeto **p_ObjetoFrog_2, char *P
 	return CONTINUAR;
 }
 
-	void PonemeNewFrogEnLista( Objeto **p_ObjetoFrog, Objeto **p_NewFrog ){	// Pone al frog nuevo en su lugar en la lista
+	void PonemeNewFrogEnLista( Objeto **p_ObjetoFrog, Objeto **p_NewFrog ){
+	/**
+	\fn void PonemeNewFrogEnLista( Objeto **p_ObjetoFrog, Objeto **p_NewFrog )
+	\brief Pone al frog nuevo en su lugar en la lista
+	*/
 	(*p_NewFrog)->Sig = (*p_ObjetoFrog)->Sig;
 	(*p_ObjetoFrog)->Sig = (*p_NewFrog);
 	(*p_NewFrog)->Ant = (*p_ObjetoFrog);

@@ -9,6 +9,12 @@
 #include "../inc/Inicializacion.h"
 
 void RanaSaltaArriba( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, char *p_ContadorSprites, char *PosicionesFinales ){
+	/**
+	\fn void RanaSaltaArriba( Objeto **p_ObjetoFrog,
+	 ALLEGRO_BITMAP **VecFrog, char *p_ContadorSprites,
+	 *  char *PosicionesFinales )
+	\brief Salto de la rana hacia arriba
+	*/
 	Objeto *ObjetoFrog = *(p_ObjetoFrog);
 	char ContadorSprites = *(p_ContadorSprites);
 
@@ -61,6 +67,11 @@ void RanaSaltaArriba( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, char *p_C
 }
 
 void RanaSaltaAbajo( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, char *p_ContadorSprites ){
+	/**
+	\fn void RanaSaltaAbajo( Objeto **p_ObjetoFrog,
+	 ALLEGRO_BITMAP **VecFrog, char *p_ContadorSprites )
+	\brief Salto de la rana hacia abajo
+	*/
 	Objeto *ObjetoFrog = *(p_ObjetoFrog);
 	char ContadorSprites = *(p_ContadorSprites);
 
@@ -83,6 +94,11 @@ void RanaSaltaAbajo( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, char *p_Co
 }
 
 void RanaSaltaIzquierda( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, char *p_ContadorSprites ){
+	/**
+	\fn void RanaSaltaIzquierda( Objeto **p_ObjetoFrog,
+	 ALLEGRO_BITMAP **VecFrog, char *p_ContadorSprites )
+	\brief Salto de la rana hacia la izquierda
+	*/
 	Objeto *ObjetoFrog = *(p_ObjetoFrog);
 	char ContadorSprites = *(p_ContadorSprites);
 	
@@ -105,6 +121,11 @@ void RanaSaltaIzquierda( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, char *
 }
 
 void RanaSaltaDerecha( Objeto **p_ObjetoFrog, ALLEGRO_BITMAP **VecFrog, char *p_ContadorSprites ){
+	/**
+	\fn void RanaSaltaDerecha( Objeto **p_ObjetoFrog,
+	 ALLEGRO_BITMAP **VecFrog, char *p_ContadorSprites )
+	\brief Salto de la rana hacia la derecha
+	*/
 	Objeto *ObjetoFrog = *(p_ObjetoFrog);
 	char ContadorSprites = *(p_ContadorSprites);
 	

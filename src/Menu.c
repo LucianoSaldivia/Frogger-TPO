@@ -12,7 +12,12 @@
 #include "../inc/Dibujos.h"
 #include "../inc/Sockets.h"
 
-char Menu( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Maneja todos los menus iniciales
+char Menu( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn char Menu( ALLEGRO_DISPLAY **p_display,
+	 ALLEGRO_EVENT_QUEUE **p_event_queue )
+	\brief Maneja todos los menus iniciales
+	*/
 	char Flag = ERROR;
 	
 	while ( Flag != OvsC && Flag != OvsO_OFFLINE && Flag != OvsO_ONLINE ){
@@ -30,7 +35,11 @@ char Menu( ALLEGRO_DISPLAY **p_display, ALLEGRO_EVENT_QUEUE **p_event_queue ){	/
 	return Flag;
 }
 
-char MenuPrincipal( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos permite elegir Jugar, Ver Puntajes o Salir
+char MenuPrincipal( ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn char MenuPrincipal( ALLEGRO_EVENT_QUEUE **p_event_queue )
+	\brief Nos permite elegir Jugar, Ver Puntajes o Salir
+	*/
 	ALLEGRO_BITMAP *MenuBack = NULL, *Frog = NULL;
 	ALLEGRO_FONT *FuenteTitulo = NULL, *FuenteOpciones = NULL, *FuenteAclaraciones = NULL;
 	static int Pos_x = 247, Pos_y = 326;
@@ -98,7 +107,11 @@ char MenuPrincipal( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos permite elegir
 	return Retornar;
 }
 
-char MenuJugar( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos permite elegir 1vsC, 1vs1 (OFFLINE) o 1vs1 (ONLINE)
+char MenuJugar( ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn char MenuJugar( ALLEGRO_EVENT_QUEUE **p_event_queue )
+	\brief Nos permite elegir 1vsC, 1vs1 (OFFLINE) o 1vs1 (ONLINE)
+	*/
 	ALLEGRO_BITMAP *MenuBack = NULL, *Frog = NULL;
 	ALLEGRO_FONT *FuenteTitulo = NULL, *FuenteOpciones = NULL, *FuenteAclaraciones = NULL;
 	int Pos_x = 239, Pos_y = 326;
@@ -179,7 +192,11 @@ char MenuJugar( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos permite elegir 1vs
 	return Retornar;
 }
 
-char MenuPuntajes( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos muestra los puntajes guardados en el archivo de puntajes
+char MenuPuntajes( ALLEGRO_EVENT_QUEUE **p_event_queue ){
+	/**
+	\fn char MenuPuntajes( ALLEGRO_EVENT_QUEUE **p_event_queue ) 
+	\brief Nos muestra los puntajes guardados en el archivo de puntajes
+	*/
 	ALLEGRO_BITMAP *MenuBack = NULL, *Frog = NULL;
 	ALLEGRO_FONT *FuenteTitulo = NULL, *FuenteOpciones = NULL, *FuenteAclaraciones = NULL;
 	bool Volver = false;
@@ -225,7 +242,11 @@ char MenuPuntajes( ALLEGRO_EVENT_QUEUE **p_event_queue ){	// Nos muestra los pun
 	return Retornar;
 }
 
-char MenuPausa( ALLEGRO_DISPLAY **p_display ){	// Nos permite, seguir con el juego, volver al menu principal o salir
+char MenuPausa( ALLEGRO_DISPLAY **p_display ){
+	/**
+	\fn char MenuPausa( ALLEGRO_DISPLAY **p_display )
+	\brief Nos permite, seguir con el juego, volver al menu principal o salir
+	*/
 	ALLEGRO_EVENT_QUEUE *Eventos_Pausa = NULL;
 	ALLEGRO_BITMAP *MenuPausa = NULL;
 	char Retornar = -10;
@@ -265,7 +286,13 @@ char MenuPausa( ALLEGRO_DISPLAY **p_display ){	// Nos permite, seguir con el jue
 	return Retornar;	
 }
 
-char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, const char *Titulo ){	// Nos pide nombre para guardar en un archivo nuestro puntaje
+char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, const char *Titulo ){
+	/**
+	\fn MenuNuevoPuntaje( Objeto **p_Ini,
+	 ALLEGRO_DISPLAY **p_display, int Puntos,
+	 const char *Titulo )
+	\brief Nos pide nombre para guardar en un archivo nuestro puntajer
+	*/
 	ALLEGRO_EVENT_QUEUE *Eventos_Nuevo_Puntaje;
 	ALLEGRO_FONT *Fuente = NULL;
 	ALLEGRO_BITMAP *MenuFinJuego = NULL;
@@ -582,7 +609,12 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 	return Retornar;
 }
 
-	char GuardarOrdenadoEnArchivo( char *NewNombre, int Puntos, const char *RutaArchivo ){	// Arma un struct con nuestro nombre y puntaje, y lo guarda en el archivo de puntaje
+	char GuardarOrdenadoEnArchivo( char *NewNombre, int Puntos, const char *RutaArchivo ){
+	/**
+	\fn char GuardarOrdenadoEnArchivo( char *NewNombre,
+	 int Puntos, const char *RutaArchivo )
+	\brief Arma un struct con nuestro nombre y puntaje, y lo guarda en el archivo de puntaje
+	*/
 	Puntaje *Ini = NULL, *Act = NULL, *Ant = NULL, *New = NULL;
 	FILE *fp;
 	char Retornar = CONTINUAR, *ActNombre, Aux[50];
@@ -678,7 +710,11 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 	return Retornar;
 }
 
-	void LiberarMemoriaDePuntos( Puntaje *Ini ){	// Destruimos la lista creada para ordenar puntaje nuevo
+	void LiberarMemoriaDePuntos( Puntaje *Ini ){
+	/**
+	\fn void LiberarMemoriaDePuntos( Puntaje *Ini )
+	\brief Destruimos la lista creada para ordenar puntaje nuevo
+	*/
 	Puntaje *Act, *Ant = NULL;
 	
 	Act = Ini;
@@ -690,7 +726,12 @@ char MenuNuevoPuntaje( Objeto **p_Ini, ALLEGRO_DISPLAY **p_display, int Puntos, 
 	}
 }
 
-char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){	// Nos pide el numero de puerto para realizar la conexion con el Jugador 2
+char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){ 
+	/**
+	\fn char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display,
+	 int *NPuerto )
+	\brief Nos pide el numero de puerto para realizar la conexion con el Jugador 2
+	*/
 	ALLEGRO_EVENT_QUEUE *Eventos;
 	ALLEGRO_FONT *Fuente = NULL;
 	ALLEGRO_BITMAP *MenuFinJuego = NULL;
@@ -834,7 +875,11 @@ char MenuPedirPuerto( ALLEGRO_DISPLAY **p_display, int *NPuerto ){	// Nos pide e
 	return Retornar;
 }
 
-int MenuEsperarJugador2( int *p_socketfd, int puerto ){	// Muestra una pantalla de espera
+int MenuEsperarJugador2( int *p_socketfd, int puerto ){
+	/**
+	\fn int MenuEsperarJugador2( int *p_socketfd, int puerto )
+	\brief Muestra una pantalla de espera
+	*/
 	ALLEGRO_BITMAP *MenuBack, *Rana1, *Rana2;
 	ALLEGRO_FONT *Fuente = NULL;
 	char StringPuerto[7], Aux1[50];
@@ -883,8 +928,12 @@ int MenuEsperarJugador2( int *p_socketfd, int puerto ){	// Muestra una pantalla 
 }
 
 char MenuPausaONLINE( ALLEGRO_DISPLAY **p_display, int socketfd, bool *key, ALLEGRO_TIMER **p_resting_timer_2, ALLEGRO_TIMER **p_sprites_timer_2 ){
-	// Igual a MenuPausa, pero lee el socket indicado Jugador 2
-	
+	/**
+	\fn MenuPausaONLINE( ALLEGRO_DISPLAY **p_display,
+	 int socketfd, bool *key, ALLEGRO_TIMER **p_resting_timer_2,
+	 ALLEGRO_TIMER **p_sprites_timer_2 )
+	\brief Igual a MenuPausa, pero lee el socket indicado Jugador 2
+	*/
 	ALLEGRO_EVENT_QUEUE *Eventos_Pausa = NULL;
 	ALLEGRO_BITMAP *MenuPausa = NULL;
 	char Retornar = -10;
